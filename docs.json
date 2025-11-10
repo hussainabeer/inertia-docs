@@ -110,7 +110,8 @@
                             "v2/the-basics/manual-visits",
                             "v2/the-basics/forms",
                             "v2/the-basics/file-uploads",
-                            "v2/the-basics/validation"
+                            "v2/the-basics/validation",
+                            "v2/the-basics/view-transitions"
                         ]
                     },
                     {
@@ -260,6 +261,10 @@
         {
             "source": "/validation",
             "destination": "/v2/the-basics/validation"
+        },
+        {
+            "source": "/view-transitions",
+            "destination": "/v2/the-basics/view-transitions"
         },
         {
             "source": "/shared-data",

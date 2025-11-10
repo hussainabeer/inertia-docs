@@ -37,7 +37,7 @@ export default function Profile() {
 }
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 import { useRemember } from '@inertiajs/svelte'
 
 const form = useRemember({
@@ -79,7 +79,7 @@ export default function Profile() {
 }
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 import { page, useRemember } from '@inertiajs/svelte'
 
 const form = useRemember({
@@ -116,7 +116,7 @@ export default function Profile() {
 }
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 import { page, useRemember } from '@inertiajs/svelte'
 
 const form = useRemember({
@@ -147,7 +147,7 @@ const form = useForm('CreateUser', data)
 const form = useForm(`EditUser:\${user.id}\
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 import { useForm } from '@inertiajs/svelte'
 
 const form = useForm('CreateUser', data)
@@ -184,7 +184,7 @@ router.remember(data, 'my-key')
 let data = router.restore('my-key')
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 import { router } from '@inertiajs/svelte'
 
 // Save local component state to history state

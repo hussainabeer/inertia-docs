@@ -40,7 +40,7 @@ export default () => (
 )
 ```
 
-```html Svelte icon="code"
+```html Svelte icon="s"
 <script>
   import { Form } from '@inertiajs/svelte'
 </script>
@@ -80,7 +80,7 @@ The component also supports nested data structures, file uploads, and dotted key
 </Form>
 ```
 
-```html Svelte icon="code"
+```html Svelte icon="s"
 <Form action="/reports" method="post">
   <input type="text" name="name" />
   <textarea name="report[description]"></textarea>
@@ -118,7 +118,7 @@ You can pass a `transform` prop to modify the form data before submission. This 
 </Form>
 ```
 
-```html Svelte icon="code"
+```html Svelte icon="s"
 <Form
   action="/posts"
   method="post"
@@ -165,7 +165,7 @@ export default () => (
 )
 ```
 
-```html Svelte icon="code"
+```html Svelte icon="s"
 <script>
   import { Form } from '@inertiajs/svelte'
   import { store } from 'App/Http/Controllers/UserController'
@@ -175,6 +175,62 @@ export default () => (
   <input type="text" name="name" />
   <input type="email" name="email" />
   <button type="submit">Create User</button>
+</Form>
+```
+
+</CodeGroup>
+
+### Default values
+
+You can set default values for form inputs using standard HTML attributes. Use <ReactSpecific>`defaultValue`</ReactSpecific><VueSpecific>`defaultValue`</VueSpecific><SvelteSpecific>`value`</SvelteSpecific>for text inputs and textareas, and <ReactSpecific>`defaultChecked`</ReactSpecific><VueSpecific>`defaultChecked`</VueSpecific><SvelteSpecific>`checked`</SvelteSpecific>for checkboxes and radios.
+
+<CodeGroup>
+
+```html Vue icon="vuejs"
+<Form action="/users" method="post">
+  <input type="text" name="name" defaultValue="John Doe" />
+
+  <select name="country">
+    <option value="us">United States</option>
+    <option value="ca">Canada</option>
+    <option value="uk" selected>United Kingdom</option>
+  </select>
+
+  <input type="checkbox" name="subscribe" value="yes" defaultChecked />
+
+  <button type="submit">Submit</button>
+</Form>
+```
+
+```jsx React icon="react"
+<Form action="/users" method="post">
+  <input type="text" name="name" defaultValue="John Doe" />
+
+  <select name="country" defaultValue="uk">
+    <option value="us">United States</option>
+    <option value="ca">Canada</option>
+    <option value="uk">United Kingdom</option>
+  </select>
+
+  <input type="checkbox" name="subscribe" value="yes" defaultChecked />
+
+  <button type="submit">Submit</button>
+</Form>
+```
+
+```html Svelte icon="s"
+<Form action="/users" method="post">
+  <input type="text" name="name" value="John Doe" />
+
+  <select name="country" value="uk">
+    <option value="us">United States</option>
+    <option value="ca">Canada</option>
+    <option value="uk">United Kingdom</option>
+  </select>
+
+  <input type="checkbox" name="subscribe" value="yes" checked />
+
+  <button type="submit">Submit</button>
 </Form>
 ```
 
@@ -256,7 +312,7 @@ The `<Form>` component exposes reactive state and helper methods through its def
 </Form>
 ```
 
-```html Svelte 4 icon="code"
+```html Svelte 4 icon="s"
 <Form
   action="/users"
   method="post"
@@ -290,7 +346,7 @@ The `<Form>` component exposes reactive state and helper methods through its def
 </Form>
 ```
 
-```html Svelte 5 icon="code"
+```html Svelte 5 icon="s"
 <Form action="/users" method="post">
   {#snippet children({
     errors,
@@ -350,7 +406,7 @@ The `errors` object uses dotted notation for nested fields, allowing you to disp
 </Form>
 ```
 
-```html Svelte 4 icon="code"
+```html Svelte 4 icon="s"
 <Form action="/users" method="post" let:errors>
   <input type="text" name="user.name" />
   {#if errors['user.name']}
@@ -359,7 +415,7 @@ The `errors` object uses dotted notation for nested fields, allowing you to disp
 </Form>
 ```
 
-```html Svelte 5 icon="code"
+```html Svelte 5 icon="s"
 <Form action="/users" method="post">
   {#snippet children({ errors })}
     <input type="text" name="user.name" />
@@ -430,7 +486,7 @@ In addition to `action` and `method`, the `<Form>` component accepts several pro
 </Form>
 ```
 
-```html Svelte icon="code"
+```html Svelte icon="s"
 <Form
   action="/profile"
   method="put"
@@ -528,7 +584,7 @@ The `<Form>` component emits all the standard visit [events](/v2/advanced/events
 </Form>
 ```
 
-```html Svelte 4 icon="code"
+```html Svelte 4 icon="s"
 <Form
   action="/users"
   method="post"
@@ -546,7 +602,7 @@ The `<Form>` component emits all the standard visit [events](/v2/advanced/events
 </Form>
 ```
 
-```html Svelte 5 icon="code"
+```html Svelte 5 icon="s"
 <Form
   action="/users"
   method="post"
@@ -606,7 +662,7 @@ The `Form` component provides several attributes that allow you to reset the for
 </Form>
 ```
 
-```html Svelte icon="code"
+```html Svelte icon="s"
 \<!-- Reset the entire form on success -->
 <Form action="/users" method="post" resetOnSuccess>
   <input type="text" name="name" />
@@ -660,7 +716,7 @@ The `Form` component provides several attributes that allow you to reset the for
 </Form>
 ```
 
-```html Svelte icon="code"
+```html Svelte icon="s"
 \<!-- Reset the entire form on success -->
 <Form action="/users" method="post" resetOnError>
   <input type="text" name="name" />
@@ -700,7 +756,7 @@ The `Form` component provides the `setDefaultsOnSuccess` attribute to set the cu
 </Form>
 ```
 
-```html Svelte icon="code"
+```html Svelte icon="s"
 <Form action="/users" method="post" setDefaultsOnSuccess>
     <input type="text" name="name" />
     <input type="email" name="email" />
@@ -734,7 +790,7 @@ The `<Form>` component supports dotted key notation for creating nested objects 
 </Form>
 ```
 
-```html Svelte icon="code"
+```html Svelte icon="s"
 <Form action="/users" method="post">
   <input type="text" name="user.name" />
   <input type="text" name="user.skills[]" />
@@ -779,7 +835,7 @@ If you need literal dots in your field names (not as nested object separators), 
 </Form>
 ```
 
-```html Svelte icon="code"
+```html Svelte icon="s"
 <Form action="/config" method="post">
   <input type="text" name="app\\.name" />
   <input type="text" name="settings.theme\\.mode" />
@@ -852,7 +908,7 @@ export default function CreateUser() {
 }
 ```
 
-```html Svelte icon="code"
+```html Svelte icon="s"
 <script>
   import { Form } from '@inertiajs/svelte'
 
@@ -934,7 +990,7 @@ return (
 )
 ```
 
-```html Svelte 4 icon="code"
+```html Svelte 4 icon="s"
 <script>
   import { useForm } from '@inertiajs/svelte'
 
@@ -963,7 +1019,7 @@ return (
 </form>
 ```
 
-```jsx Svelte 5 icon="code"
+```jsx Svelte 5 icon="s"
 <script>
   import { useForm } from '@inertiajs/svelte'
 
@@ -1019,7 +1075,7 @@ patch(url, options)
 destroy(url, options)
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 $form.submit(method, url, options)
 $form.get(url, options)
 $form.post(url, options)
@@ -1050,7 +1106,7 @@ post('/profile', {
 })
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 $form.post('/profile', {
   preserveScroll: true,
   onSuccess: () => $form.reset('password'),
@@ -1081,7 +1137,7 @@ transform((data) => ({
 }))
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 $form
   .transform((data) => ({
     ...data,
@@ -1106,7 +1162,7 @@ const { processing } = useForm({ ... })
 <button type="submit" disabled={processing}>Submit</button>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 <button type="submit" disabled={$form.processing}>Submit</button>
 ```
 
@@ -1132,7 +1188,7 @@ const { progress } = useForm({ ... })
 )}
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 {#if $form.progress}
   <progress value={$form.progress.percentage} max="100">
     {$form.progress.percentage}%
@@ -1158,7 +1214,7 @@ const { errors } = useForm({ ... })
 {errors.email && <div>{errors.email}</div>}
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 {#if $form.errors.email}
   <div>{$form.errors.email}</div>
 {/if}
@@ -1190,7 +1246,7 @@ clearErrors()
 clearErrors('field', 'anotherfield')
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 // Clear all errors...
 $form.clearErrors()
 
@@ -1228,7 +1284,7 @@ setError({
 });
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 // Set a single error
 $form.setError('field', 'Your error message.');
 
@@ -1244,6 +1300,8 @@ $form.setError({
 Unlike an actual form submission, the page's props remain unchanged when manually setting errors on a form instance.
 
 When a form has been successfully submitted, the `wasSuccessful` property will be `true`. In addition to this, forms have a `recentlySuccessful` property, which will be set to `true` for two seconds after a successful form submission. This property can be utilized to show temporary success messages.
+
+You may customize the duration of the `recentlySuccessful` state by setting the `form.recentlySuccessfulDuration` option in your [application defaults](/client-side-setup#configuring-defaults). The default value is `2000` milliseconds.
 
 ### Resetting the Form
 
@@ -1269,7 +1327,7 @@ reset()
 reset('field', 'anotherfield')
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 // Reset the form...
 $form.reset()
 
@@ -1301,7 +1359,7 @@ resetAndClearErrors()
 resetAndClearErrors('field', 'anotherfield')
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 // Reset the form and clear all errors...
 $form.resetAndClearErrors()
 
@@ -1347,7 +1405,7 @@ setDefaults({
 })
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 // Set the form's current values as the new defaults...
 $form.defaults()
 
@@ -1379,7 +1437,7 @@ const { isDirty } = useForm({ ... })
 {isDirty && <div>There are unsaved form changes.</div>}
 ```
 
-```html Svelte icon="code"
+```html Svelte icon="s"
 {#if $form.isDirty}
   <div>There are unsaved form changes.</div>
 {/if}
@@ -1403,7 +1461,7 @@ const { cancel } = useForm({ ... })
 cancel()
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 $form.cancel()
 ```
 
@@ -1429,7 +1487,7 @@ const form = useForm('CreateUser', data)
 const form = useForm(`EditUser:\${user.id}\
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 import { useForm } from '@inertiajs/svelte'
 
 const form = useForm('CreateUser', data)
@@ -1468,7 +1526,7 @@ const form = useForm({
 form.submit(store())
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 import { useForm } from '@inertiajs/svelte'
 import { store } from 'App/Http/Controllers/UserController'
 
@@ -1593,7 +1651,7 @@ export default function Edit() {
 }
 ```
 
-```html Svelte 4 icon="code"
+```html Svelte 4 icon="s"
 <script>
   import { router } from '@inertiajs/svelte'
 
@@ -1622,7 +1680,7 @@ export default function Edit() {
 </form>
 ```
 
-```html Svelte 5 icon="code"
+```html Svelte 5 icon="s"
 <script>
   import { router } from '@inertiajs/svelte'
 
@@ -1656,7 +1714,7 @@ export default function Edit() {
 
 ## File uploads
 
-When making requests or form submissions that include files, Inertia will automatically convert the request data into a `FormData` object. This works with the `<Form>` component, `useForm` helper, and manual router submissions.
+When making requests or form submissions that include files, Inertia will automatically convert the request data into a `FormData` object. This works with the `<Form>` component, `useForm`helper, and manual router submissions.
 
 For more information on file uploads, including progress tracking, see the [file uploads documentation](/v2/the-basics/file-uploads).
 

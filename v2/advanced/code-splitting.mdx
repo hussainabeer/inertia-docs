@@ -32,7 +32,7 @@ Vite enables code splitting (or lazy-loading as they call it) by default when us
   },
 ```
 
-```diff Svelte icon="code"
+```diff Svelte icon="s"
   resolve: name => {
 \-   const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
 \-   return pages[`./Pages/\${name}.svelte`]
@@ -75,7 +75,7 @@ Finally, update the `resolve` callback in your app's initialization code to use 
 \+ resolve: name => import(`./Pages/\${name}`),
 ```
 
-```diff Svelte icon="code"
+```diff Svelte icon="s"
 \- resolve: name => require(`./Pages/\${name}.svelte`),
 \+ resolve: name => import(`./Pages/\${name}.svelte`),
 ```

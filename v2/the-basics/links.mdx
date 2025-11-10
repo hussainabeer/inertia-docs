@@ -22,7 +22,7 @@ import { Link } from '@inertiajs/react'
 <a href="/">Home</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inertia, Link } from '@inertiajs/svelte'
 
 <a href="/" use:inertia>Home</a>
@@ -54,7 +54,7 @@ import { Link } from '@inertiajs/react'
 <button type="button">Logout</button>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { Link } from '@inertiajs/svelte'
 
 <a href="/logout" method="post" as="button">Logout</a>
@@ -85,7 +85,7 @@ import { Link } from '@inertiajs/react'
 <a href="/logout" method="post" as="button">Logout</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inertia, Link } from '@inertiajs/svelte'
 
 <button use:inertia={{ href: '/logout', method: 'post' }} type="button">Logout</button>
@@ -115,7 +115,7 @@ import { show } from 'App/Http/Controllers/UserController'
 <a href={show(1)}>John Doe</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inertia, Link } from '@inertiajs/svelte'
 import { show } from 'App/Http/Controllers/UserController'
 
@@ -144,7 +144,7 @@ import { Link } from '@inertiajs/react'
 <a href="/endpoint" method="post" data={{ foo: bar }}>Save</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inertia, Link } from '@inertiajs/svelte'
 
 <button use:inertia={{ href: '/endpoint', method: 'post', data: { foo: bar } }} type="button">Save</button>
@@ -172,7 +172,7 @@ import { Link } from '@inertiajs/react'
 <a href="/endpoint" headers={{ foo: bar }}>Save</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inertia, Link } from '@inertiajs/svelte'
 
 <button use:inertia={{ href: '/endpoint', headers: { foo: bar } }}>Save</button>
@@ -200,7 +200,7 @@ import { Link } from '@inertiajs/react'
 <a replace href="/">Home</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inertia, Link } from '@inertiajs/svelte'
 
 <a href="/" use:inertia={{ replace: true }}>Home</a>
@@ -232,7 +232,7 @@ import { Link } from '@inertiajs/react'
 <a href="/search" data={query} preserveState>Search</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inertia, Link } from '@inertiajs/svelte'
 
 <input bind:value={query} type="text" />
@@ -262,7 +262,7 @@ import { Link } from '@inertiajs/react'
 <a preserveScroll href="/">Home</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inertia, Link } from '@inertiajs/svelte'
 
 <a href="/" use:inertia={{ preserveScroll: true }}>Home</a>
@@ -292,7 +292,7 @@ import { Link } from '@inertiajs/react'
 <a href="/users?active=true" only={['users']}>Show active</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inertia, Link } from '@inertiajs/svelte'
 
 <a href="/users?active=true" use:inertia={{ only: ['users'] }}>Show active</a>
@@ -303,6 +303,32 @@ import { inertia, Link } from '@inertiajs/svelte'
 </CodeGroup>
 
 For more information on this topic, check out the complete documentation on [partial reloads](/v2/data-props/partial-reloads).
+
+## View transitions
+
+You may enable [View transitions](/v2/the-basics/view-transitions) for a link by setting the `viewTransition` prop to `true`. This will use the browser's View Transitions API to animate the page transition.
+
+<CodeGroup>
+
+```jsx Vue icon="vuejs"
+import { Link } from '@inertiajs/vue3'
+
+<a href="/another-page" view-transition>Navigate</a>
+```
+
+```jsx React icon="react"
+import { Link } from '@inertiajs/react'
+
+<a href="/another-page" viewTransition>Navigate</a>
+```
+
+```jsx Svelte icon="s"
+import { Link } from '@inertiajs/svelte'
+
+<a href="/another-page" viewTransition>Navigate</a>
+```
+
+</CodeGroup>
 
 ## Active states
 
@@ -344,7 +370,7 @@ const { url, component } = usePage()
 <a href="/users" >Users</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inertia, Link, page } from '@inertiajs/svelte'
 
 // URL exact match...

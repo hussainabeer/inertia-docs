@@ -6,7 +6,7 @@ Inertia supports prefetching data for pages that are likely to be visited next. 
 
 ## Link prefetching
 
-To prefetch data for a page, you can add the `prefetch` prop to the Inertia link component. By default, Inertia will prefetch the data for the page when the user hovers over the link for more than 75ms.
+To prefetch data for a page, you can add the `prefetch` prop to the Inertia link component. By default, Inertia will prefetch the data for the page when the user hovers over the link for more than 75ms. You may customize this hover delay by setting the `prefetch.hoverDelay` option in your [application defaults](/client-side-setup#configuring-defaults).
 
 <CodeGroup>
 
@@ -22,7 +22,7 @@ import { Link } from '@inertiajs/react'
 <a href="/users" prefetch>Users</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inerta } from '@inertiajs/svelte'
 
 <a href="/users" use:inertia={{ prefetch: true }}>Users</a>
@@ -30,7 +30,7 @@ import { inerta } from '@inertiajs/svelte'
 
 </CodeGroup>
 
-By default, data is cached for 30 seconds before being evicted. You can customize this behavior by passing a `cacheFor` prop to the `Link` component.
+By default, data is cached for 30 seconds before being evicted. You may customize this default value by setting the `prefetch.cacheFor` option in your [application defaults](/client-side-setup#configuring-defaults). You may also customize the cache duration on a per-link basis by passing a `cacheFor` prop to the `Link` component.
 
 <CodeGroup>
 
@@ -50,7 +50,7 @@ import { Link } from '@inertiajs/react'
 <a href="/users" prefetch cacheFor={5000}>Users</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inertia } from '@inertiajs/svelte'
 
 <a href="/users" use:inertia={{ prefetch: true, cacheFor: '1m' }}>Users</a>
@@ -76,7 +76,7 @@ import { Link } from '@inertiajs/react'
 <a href="/users" prefetch="click">Users</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inertia } from '@inertiajs/svelte'
 
 <a href="/users" use:inertia={{ prefetch: 'click' }}>Users</a>
@@ -100,7 +100,7 @@ import { Link } from '@inertiajs/react'
 <a href="/users" prefetch="mount">Users</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inerta } from '@inertiajs/svelte'
 
 <a href="/users" use:inertia={{ prefetch: 'mount' }}>Users</a>
@@ -124,7 +124,7 @@ import { Link } from '@inertiajs/react'
 <a href="/users" prefetch={['mount', 'hover']}>Users</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inertia } from '@inertiajs/svelte'
 
 <a href="/users" use:inertia={{ prefetch: ['mount', 'hover'] }}>Users</a>
@@ -167,7 +167,7 @@ import { usePrefetch } from '@inertiajs/react'
 const { lastUpdatedAt, isPrefetching, isPrefetched, flush } = usePrefetch()
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 import { usePrefetch } from '@inertiajs/svelte'
 
 const { lastUpdatedAt, isPrefetching, isPrefetched, flush } = usePrefetch()
@@ -195,7 +195,7 @@ const { lastUpdatedAt, isPrefetching, isPrefetched, flush } = usePrefetch({
 })
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 import { usePrefetch } from '@inertiajs/svelte'
 
 const { lastUpdatedAt, isPrefetching, isPrefetched, flush } = usePrefetch({
@@ -231,7 +231,7 @@ import { Link } from '@inertiajs/react'
 <a href="/dashboard" prefetch cacheTags={['dashboard', 'stats']}>Dashboard</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inertia } from '@inertiajs/svelte'
 
 <a href="/users" use:inertia={{ prefetch: true, cacheTags: 'users' }}>Users</a>
@@ -293,7 +293,7 @@ import { router } from '@inertiajs/react'
 router.on('navigate', () => router.flushAll())
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 import { router } from '@inertiajs/svelte'
 
 router.on('navigate', () => router.flushAll())
@@ -333,7 +333,7 @@ export default () => (
 )
 ```
 
-```html Svelte icon="code"
+```html Svelte icon="s"
 <script>
   import { Form } from '@inertiajs/svelte'
 </script>
@@ -382,7 +382,7 @@ function submit(e) {
 }
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 import { useForm } from '@inertiajs/svelte'
 
 const form = useForm({
@@ -425,7 +425,7 @@ import { Link } from '@inertiajs/react'
 <a href="/users" prefetch cacheFor={['30s', '1m']}>Users</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inertia } from '@inertiajs/svelte'
 
 <a href="/users" use:inertia={{ prefetch: true, cacheFor: ['30s', '1m'] }}>Users</a>

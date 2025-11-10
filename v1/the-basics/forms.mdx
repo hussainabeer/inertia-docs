@@ -113,7 +113,7 @@ export default function Edit() {
 }
 ```
 
-```html Svelte icon="code"
+```html Svelte icon="s"
 <script>
   import { router } from '@inertiajs/svelte'
 
@@ -271,7 +271,7 @@ return (
 )
 ```
 
-```html Svelte icon="code"
+```html Svelte icon="s"
 <script>
 import { useForm } from '@inertiajs/svelte'
 
@@ -335,7 +335,7 @@ patch(url, options)
 destroy(url, options)
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 $form.submit(method, url, options)
 $form.get(url, options)
 $form.post(url, options)
@@ -373,7 +373,7 @@ post('/profile', {
 })
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 $form.post('/profile', {
   preserveScroll: true,
   onSuccess: () => $form.reset('password'),
@@ -413,7 +413,7 @@ transform((data) => ({
 }))
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 $form
   .transform((data) => ({
     ...data,
@@ -442,7 +442,7 @@ const { processing } = useForm({ ... })
 <button type="submit" disabled={processing}>Submit</button>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 <button type="submit" disabled={$form.processing}>Submit</button>
 ```
 
@@ -474,7 +474,7 @@ const { progress } = useForm({ ... })
 )}
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 {#if $form.progress}
   <progress value={$form.progress.percentage} max="100">
     {$form.progress.percentage}%
@@ -502,7 +502,7 @@ const { errors } = useForm({ ... })
 {errors.email && <div>{errors.email}</div>}
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 {#if $form.errors.email}
   <div>{$form.errors.email}</div>
 {/if}
@@ -542,7 +542,7 @@ clearErrors()
 clearErrors('field', 'anotherfield')
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 // Clear all errors...
 $form.clearErrors()
 
@@ -591,7 +591,7 @@ setError({
 });
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 // Set a single error
 $form.setError('field', 'Your error message.');
 
@@ -638,7 +638,7 @@ reset()
 reset('field', 'anotherfield')
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 // Reset the form...
 $form.reset()
 
@@ -696,7 +696,7 @@ setDefaults({
 })
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 // Set the form's current values as the new defaults...
 $form.defaults()
 
@@ -730,7 +730,7 @@ const { isDirty } = useForm({ ... })
 {isDirty && <div>There are unsaved form changes.</div>}
 ```
 
-```html Svelte icon="code"
+```html Svelte icon="s"
 {#if $form.isDirty}
   <div>There are unsaved form changes.</div>
 {/if}
@@ -756,7 +756,7 @@ const { cancel } = useForm({ ... })
 cancel()
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 $form.cancel()
 ```
 
@@ -787,7 +787,7 @@ const form = useForm('CreateUser', data)
 const form = useForm(`EditUser:\${user.id}\
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 import { useForm } from '@inertiajs/svelte'
 
 const form = useForm('CreateUser', data)

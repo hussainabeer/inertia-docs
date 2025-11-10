@@ -22,7 +22,7 @@ npm install @inertiajs/vue3
 npm install @inertiajs/react
 ```
 
-```bash Svelte icon="code"
+```bash Svelte icon="s"
 npm install @inertiajs/svelte
 ```
 
@@ -66,7 +66,7 @@ createInertiaApp({
 })
 ```
 
-```js Svelte 4 icon="code"
+```js Svelte 4 icon="s"
 import { createInertiaApp } from '@inertiajs/svelte'
 
 createInertiaApp({
@@ -80,7 +80,7 @@ createInertiaApp({
 })
 ```
 
-```js Svelte 5 icon="code"
+```js Svelte 5 icon="s"
 import { createInertiaApp } from '@inertiajs/svelte'
 import { mount } from 'svelte'
 
@@ -98,6 +98,91 @@ createInertiaApp({
 </CodeGroup>
 
 The `setup` callback receives everything necessary to initialize the client-side framework, including the root Inertia `App` component.
+
+## Configuring defaults
+
+You may pass a `defaults` object to `createInertiaApp()` to configure default settings for various features. You don't have to pass all keys, just the ones you want to tweak.
+
+```js
+createInertiaApp({
+// ...
+defaults: {
+form: {
+recentlySuccessfulDuration: 5000,
+},
+prefetch: {
+cacheFor: '1m',
+hoverDelay: 150,
+},
+visitOptions: (href, options) => {
+return {
+headers: {
+...options.headers,
+'X-Custom-Header': 'value',
+},
+}
+},
+},
+})
+```
+
+The `visitOptions` callback receives the target URL and the current visit options, and should return an object with any options you want to override. For more details on the available configuration options, see the [forms](/forms#form-errors), [prefetching](/v2/data-props/prefetching), and [manual visits](/manual-visits#global-visit-options) documentation.
+
+### Updating at runtime
+
+You may also update configuration values at runtime using the exported `config` instance. This is particularly useful when you need to adjust settings based on user preferences or application state.
+
+<CodeGroup>
+
+```js Vue icon="vuejs"
+import { config } from '@inertiajs/vue3'
+
+// Set a single value using dot notation...
+config.set('form.recentlySuccessfulDuration', 1000)
+config.set('prefetch.cacheFor', '5m')
+
+// Set multiple values at once...
+config.set({
+  'form.recentlySuccessfulDuration': 1000,
+  'prefetch.cacheFor': '5m',
+})
+```
+
+```js React icon="react"
+import { config } from '@inertiajs/react'
+
+// Set a single value using dot notation...
+config.set('form.recentlySuccessfulDuration', 1000)
+config.set('prefetch.cacheFor', '5m')
+
+// Set multiple values at once...
+config.set({
+  'form.recentlySuccessfulDuration': 1000,
+  'prefetch.cacheFor': '5m',
+})
+
+// Get a configuration value...
+const duration = config.get('form.recentlySuccessfulDuration')
+```
+
+```js Svelte icon="s"
+import { config } from '@inertiajs/svelte'
+
+// Set a single value using dot notation...
+config.set('form.recentlySuccessfulDuration', 1000)
+config.set('prefetch.cacheFor', '5m')
+
+// Set multiple values at once...
+config.set({
+  'form.recentlySuccessfulDuration': 1000,
+  'prefetch.cacheFor': '5m',
+})
+
+// Get a configuration value...
+const duration = config.get('form.recentlySuccessfulDuration')
+```
+
+</CodeGroup>
 
 ## Resolving components
 
@@ -127,7 +212,7 @@ resolve: name => {
 resolve: name => require(`./Pages/\${name}`),
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 // Vite
 resolve: name => {
   const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })

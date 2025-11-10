@@ -22,7 +22,7 @@ import { usePoll } from '@inertiajs/react'
 usePoll(2000)
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 import { usePoll } from '@inertiajs/svelte'
 
 usePoll(2000)
@@ -60,7 +60,7 @@ usePoll(2000, {
 })
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 import { usePoll } from '@inertiajs/svelte'
 
 usePoll(2000, {
@@ -75,7 +75,7 @@ usePoll(2000, {
 
 </CodeGroup>
 
-If you'd like more control over the polling behavior, the poll helper provides `stop` and `start`methods that allow you to manually start and stop polling. You can pass the `autoStart: false` option to the poll helper to prevent it from automatically starting polling when the component is mounted.
+If you'd like more control over the polling behavior, the poll helper provides `stop` and `start` methods that allow you to manually start and stop polling. You can pass the `autoStart: false` option to the poll helper to prevent it from automatically starting polling when the component is mounted.
 
 <CodeGroup>
 
@@ -111,7 +111,7 @@ export default () => {
 }
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 import { usePoll } from '@inertiajs/svelte'
 
 const { start, stop } = usePoll(2000, {}, {
@@ -143,7 +143,7 @@ usePoll(2000, {}, {
 })
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 import { usePoll } from '@inertiajs/svelte'
 
 usePoll(2000, {}, {

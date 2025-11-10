@@ -1,9 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
-
-export const Svelte4Specific = ({ children }) => {
-    const [code, setCode] = useState(
-        localStorage.getItem("code").replace(/"/g, "") || null,
-    );
+export const CurrentCodeTab = () => {
+    const [code, setCode] = useState(() => {
+        if (typeof window === "undefined") return null;
+        return localStorage.getItem("code")?.replace(/"/g, "") || null;
+    });
 
     const callback = useCallback((event) => {
         if (event.detail.key === "code") {
@@ -21,9 +20,9 @@ export const Svelte4Specific = ({ children }) => {
         };
     });
 
-    if (code !== "Svelte 4") {
-        return null;
+    if (code?.includes("Svelte")) {
+        return "Svelte";
     }
 
-    return children;
+    return code;
 };

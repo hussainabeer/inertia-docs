@@ -30,7 +30,7 @@ import { Link } from '@inertiajs/react'
 <a href="/">Home</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inertia, Link } from '@inertiajs/svelte'
 
 <a href="/" use:inertia>Home</a>
@@ -71,7 +71,7 @@ import { Link } from '@inertiajs/react'
 <button type="button">Logout</button>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inertia } from '@inertiajs/svelte'
 
 <button use:inertia="{{ href: '/logout', method: 'post' }}" type="button">Logout</button>
@@ -108,7 +108,7 @@ import { Link } from '@inertiajs/react'
 <a href="/logout" method="post" as="button">Logout</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inertia, Link } from '@inertiajs/svelte'
 
 <button use:inertia="{{ href: '/logout', method: 'post' }}" type="button">Logout</button>
@@ -140,7 +140,7 @@ import { Link } from '@inertiajs/react'
 <a href="/endpoint" method="post" data={{ foo: bar }}>Save</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { Link } from '@inertiajs/svelte'
 
 <a href="/endpoint" method="post" data={{ foo: bar }}>Save</a>
@@ -172,7 +172,7 @@ import { Link } from '@inertiajs/react'
 <a href="/endpoint" headers={{ foo: bar }}>Save</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inertia, Link } from '@inertiajs/svelte'
 
 <button use:inertia="{{ href: '/endpoint', headers: { foo: bar } }}">Save</button>
@@ -206,7 +206,7 @@ import { Link } from '@inertiajs/react'
 <a replace href="/">Home</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inertia, Link } from '@inertiajs/svelte'
 
 <a href="/" use:inertia="{{ replace: true }}">Home</a>
@@ -246,7 +246,7 @@ import { Link } from '@inertiajs/react'
 <a href="/search" data={query} preserveState>Search</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inertia, Link } from '@inertiajs/svelte'
 
 <input on:change={handleChange} value={query} />
@@ -282,7 +282,7 @@ import { Link } from '@inertiajs/react'
 <a preserveScroll href="/">Home</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inertia, Link } from '@inertiajs/svelte'
 
 <a href="/" use:inertia="{{ preserveScroll: true }}">Home</a>
@@ -318,7 +318,7 @@ import { Link } from '@inertiajs/react'
 <a href="/users?active=true" only={['users']}>Show active</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { inertia, Link } from '@inertiajs/svelte'
 
 <a href="/users?active=true" use:inertia="{{ only: ['users'] }}">Show active</a>
@@ -386,7 +386,7 @@ const { url, component } = usePage()
 <a href="/users" >Users</a>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 import { page } from '@inertiajs/svelte'
 
 // URL exact match...

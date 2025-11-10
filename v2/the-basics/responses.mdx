@@ -77,7 +77,7 @@ Arrayable objects like Eloquent models and collections are automatically convert
 
 When passing props to your components, you may want to create custom classes that can transform themselves into the appropriate data format. While Laravel's `Arrayable` interface simply converts objects to arrays, Inertia offers the more powerful `ProvidesInertiaProperty` interface for context-aware transformations.
 
-This interface requires a `toInertiaProperty` method that receives a `PropertyContext` object containing the property key (`$context->key`), all props for the page (`$context->props`), and the request instance (`$context->request`).
+This interface requires a `toInertiaProperty` method that receives a `PropertyContext`object containing the property key (`$context->key`), all props for the page ( `$context->props`), and the request instance (`$context->request`).
 
 ```php
 use Inertia\\PropertyContext;
@@ -139,7 +139,7 @@ return Inertia::render('Dashboard', [
 
 In some situations you may want to group related props together for reusability across different pages. You can accomplish this by implementing the `ProvidesInertiaProperties` interface.
 
-This interface requires a `toInertiaProperties` method that returns an array of key-value pairs. The method receives a `RenderContext` object containing the component name (`$context->component`) and request instance (`$context->request`).
+This interface requires a `toInertiaProperties` method that returns an array of key-value pairs. The method receives a `RenderContext` object containing the component name ( `$context->component`) and request instance (`$context->request`).
 
 ```php
 use App\\Models\\User;

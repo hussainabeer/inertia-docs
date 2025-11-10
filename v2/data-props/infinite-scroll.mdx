@@ -6,7 +6,7 @@ Inertia's infinite scroll feature loads additional pages of content as users scr
 
 ## Server-side
 
-To configure your paginated data for infinite scrolling, you should use the `Inertia::scroll()` method when returning your response. This method automatically configures the proper merge behavior and normalizes pagination metadata for the frontend component.
+To configure your paginated data for infinite scrolling, you should use the `Inertia::scroll()`method when returning your response. This method automatically configures the proper merge behavior and normalizes pagination metadata for the frontend component.
 
 ```php
 Route::get('/users', function () {
@@ -48,7 +48,7 @@ export default function Users({ users }) {
 }
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 <script>
   import { InfiniteScroll } from '@inertiajs/svelte'
   export let users
@@ -83,7 +83,7 @@ You can control how early content begins loading by setting a buffer distance. T
 </InfiniteScroll>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 <InfiniteScroll data="users" buffer={500}>
   \<!-- ... -->
 </InfiniteScroll>
@@ -111,7 +111,7 @@ The infinite scroll component updates the browser URL's query string (`?page=...
 </InfiniteScroll>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 <InfiniteScroll data="users" preserve-url>
   \<!-- ... -->
 </InfiniteScroll>
@@ -121,66 +121,156 @@ The infinite scroll component updates the browser URL's query string (`?page=...
 
 This is useful when infinite scroll is used for secondary content that shouldn't affect the main page URL, such as comments on a blog post or related products on a product page.
 
-## Trigger control
+## Resetting
 
-The infinite scroll component loads content in both directions when you scroll near the start or end. You can control which directions trigger loading using the `trigger` prop.
+When filters or other parameters change, you may need to reset the infinite scroll data to start from the beginning. Without resetting, new results will merge with existing content instead of replacing it.
+
+You can reset data using the `reset` visit option.
 
 <CodeGroup>
 
 ```html Vue icon="vuejs"
-\<!-- Only load when scrolling down -->
-<InfiniteScroll data="users" trigger="end">
+<script setup>
+import { router } from '@inertiajs/vue3'
+
+const show = (role) => {
+  router.visit(route('users'), {
+    data: { filter: { role } },
+    only: ['users'],
+    reset: ['users'],
+  })
+}
+</script>
+
+<template>
+  <button @click="show('admin')">Show admins</button>
+  <button @click="show('customer')">Show customers</button>
+
+  <InfiniteScroll data="users">
+    <div v-for="user in users.data" :key="user.id">
+      {{ user.name }}
+    </div>
+  </InfiniteScroll>
+</template>
+```
+
+```jsx React icon="react"
+import { InfiniteScroll, router } from '@inertiajs/react'
+
+export default function Users({ users }) {
+  const show = (role) => {
+    router.visit(route('users'), {
+      data: { filter: { role } },
+      only: ['users'],
+      reset: ['users'],
+    })
+  }
+
+  return (
+    
+      <button onClick={() => show('admin')}>Show admins</button>
+      <button onClick={() => show('customer')}>Show customers</button>
+
+      <InfiniteScroll data="users">
+        {users.data.map(user => (
+          <div key={user.id}>
+            {user.name}
+          </div>
+        ))}
+      </InfiniteScroll>
+    
+  )
+}
+```
+
+```jsx Svelte icon="s"
+<script>
+  import { InfiniteScroll, router } from '@inertiajs/svelte'
+  export let users
+
+  const show = (role) => {
+    router.visit(route('users'), {
+      data: { filter: { role } },
+      only: ['users'],
+      reset: ['users'],
+    })
+  }
+</script>
+
+<button on:click={() => show('admin')}>Show admins</button>
+<button on:click={() => show('customer')}>Show customers</button>
+
+<InfiniteScroll data="users">
+  {#each users.data as user (user.id)}
+    <div>{user.name}</div>
+  {/each}
+</InfiniteScroll>
+```
+
+</CodeGroup>
+
+For more information about the reset option, see the [Resetting props](/merging-props#resetting-props) documentation.
+
+## Loading direction
+
+The infinite scroll component loads content in both directions when you scroll near the start or end. You can control this behavior using the `only-next` and `only-previous` props.
+
+<CodeGroup>
+
+```html Vue icon="vuejs"
+\<!-- Only load the next page -->
+<InfiniteScroll data="users" only-next>
   \<!-- ... -->
 </InfiniteScroll>
 
-\<!-- Only load when scrolling up -->
-<InfiniteScroll data="messages" trigger="start">
+\<!-- Only load the previous page -->
+<InfiniteScroll data="messages" only-previous>
   \<!-- ... -->
 </InfiniteScroll>
 
 \<!-- Load in both directions (default) -->
-<InfiniteScroll data="posts" trigger="both">
+<InfiniteScroll data="posts">
   \<!-- ... -->
 </InfiniteScroll>
 ```
 
 ```jsx React icon="react"
-{/* Only load when scrolling down */}
-<InfiniteScroll data="users" trigger="end">
+{/* Only load the next page */}
+<InfiniteScroll data="users" onlyNext>
   {/* ... */}
 </InfiniteScroll>
 
-{/* Only load when scrolling up */}
-<InfiniteScroll data="messages" trigger="start">
+{/* Only load the previous page */}
+<InfiniteScroll data="messages" onlyPrevious>
   {/* ... */}
 </InfiniteScroll>
 
 {/* Load in both directions (default) */}
-<InfiniteScroll data="posts" trigger="both">
+<InfiniteScroll data="posts">
   {/* ... */}
 </InfiniteScroll>
 ```
 
-```jsx Svelte icon="code"
-\<!-- Only load when scrolling down -->
-<InfiniteScroll data="users" trigger="end">
+```jsx Svelte icon="s"
+\<!-- Only load the next page -->
+<InfiniteScroll data="users" only-next>
   \<!-- ... -->
 </InfiniteScroll>
 
-\<!-- Only load when scrolling up -->
-<InfiniteScroll data="messages" trigger="start">
+\<!-- Only load the previous page -->
+<InfiniteScroll data="messages" only-previous>
   \<!-- ... -->
 </InfiniteScroll>
 
 \<!-- Load in both directions (default) -->
-<InfiniteScroll data="posts" trigger="both">
+<InfiniteScroll data="posts">
   \<!-- ... -->
 </InfiniteScroll>
 ```
 
 </CodeGroup>
 
-The `both` option is particularly useful when users start on a middle page and need to scroll in both directions to access all content.
+The default option is particularly useful when users start on a middle page and need to scroll in both directions to access all content.
 
 ## Reverse mode
 
@@ -200,7 +290,7 @@ For chat applications, timelines, or interfaces where content is sorted descendi
 </InfiniteScroll>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 <InfiniteScroll data="messages" reverse>
   \<!-- ... -->
 </InfiniteScroll>
@@ -208,7 +298,7 @@ For chat applications, timelines, or interfaces where content is sorted descendi
 
 </CodeGroup>
 
-In reverse mode, the component flips the trigger positions so that scrolling up loads the next page (older content) and scrolling down loads the previous page (newer content). The component handles the trigger positioning, but you are responsible for reversing your content to display in the correct order.
+In reverse mode, the component flips the loading directions so that scrolling up loads the next page (older content) and scrolling down loads the previous page (newer content). The component handles the loading positioning, but you are responsible for reversing your content to display in the correct order.
 
 Reverse mode also enables automatic scrolling to the bottom on initial load, which you can disable with `:auto-scroll="false"`.
 
@@ -226,7 +316,7 @@ Reverse mode also enables automatic scrolling to the bottom on initial load, whi
 </InfiniteScroll>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 <InfiniteScroll data="messages" reverse auto-scroll={false}>
   \<!-- ... -->
 </InfiniteScroll>
@@ -287,17 +377,17 @@ export default ({ users }) => (
 )
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 <script>
   import { InfiniteScroll } from '@inertiajs/svelte'
   export let users
 </script>
 
 <InfiniteScroll data="users" manual>
-  <div slot="previous" let:exposedPrevious>
-    {#if exposedPrevious.hasMore}
-      <button on:click={exposedPrevious.fetch} disabled={exposedPrevious.loading}>
-        {exposedPrevious.loading ? 'Loading...' : 'Load previous'}
+  <div slot="previous" let:hasMore let:fetch let:loading>
+    {#if hasMore}
+      <button on:click={fetch} disabled={loading}>
+        {loading ? 'Loading...' : 'Load previous'}
       </button>
     {/if}
   </div>
@@ -306,10 +396,10 @@ export default ({ users }) => (
     <div>{user.name}</div>
   {/each}
 
-  <div slot="next" let:exposedNext>
-    {#if exposedNext.hasMore}
-      <button on:click={exposedNext.fetch} disabled={exposedNext.loading}>
-        {exposedNext.loading ? 'Loading...' : 'Load more'}
+  <div slot="next" let:hasMore let:fetch let:loading>
+    {#if hasMore}
+      <button on:click={fetch} disabled={loading}>
+        {loading ? 'Loading...' : 'Load more'}
       </button>
     {/if}
   </div>
@@ -334,7 +424,7 @@ You can also configure the component to automatically switch to manual mode afte
 </InfiniteScroll>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 <InfiniteScroll data="users" manual-after={3}>
   \<!-- ... -->
 </InfiniteScroll>
@@ -366,7 +456,7 @@ The main content area where you render your data items. This slot receives loadi
 </InfiniteScroll>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 <InfiniteScroll data="users" let:loading let:loadingPrevious let:loadingNext>
   \<!-- Your content with access to loading states -->
 </InfiniteScroll>
@@ -395,7 +485,7 @@ The loading slot is used as a fallback when loading content and no custom `befor
 </InfiniteScroll>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 <InfiniteScroll data="users">
   \<!-- Your content -->
   <div slot="loading">
@@ -462,7 +552,7 @@ The `InfiniteScroll` component renders as a `<div>` element. You may customize t
 </InfiniteScroll>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 <InfiniteScroll data="products" as="ul">
   {#each products.data as product (product.id)}
     <li>{product.name}</li>
@@ -474,12 +564,12 @@ The `InfiniteScroll` component renders as a `<div>` element. You may customize t
 
 ## Element targeting
 
-The infinite scroll component automatically tracks content and assigns page numbers to elements for [URL synchronization](#url-synchronization). When your data items are not direct children of the component's root element, you need to specify which element contains the actual data items using the `slotElement` prop.
+The infinite scroll component automatically tracks content and assigns page numbers to elements for [URL synchronization](#url-synchronization). When your data items are not direct children of the component's root element, you need to specify which element contains the actual data items using the `itemsElement` prop.
 
 <CodeGroup>
 
 ```html Vue icon="vuejs"
-<InfiniteScroll data="users" slot-element="#table-body">
+<InfiniteScroll data="users" items-element="#table-body">
   <table>
     <thead>
       <tr><th>Name</th></tr>
@@ -494,7 +584,7 @@ The infinite scroll component automatically tracks content and assigns page numb
 ```
 
 ```jsx React icon="react"
-<InfiniteScroll data="users" slotElement="#table-body">
+<InfiniteScroll data="users" itemsElement="#table-body">
   <table>
     <thead>
       <tr><th>Name</th></tr>
@@ -510,8 +600,8 @@ The infinite scroll component automatically tracks content and assigns page numb
 </InfiniteScroll>
 ```
 
-```jsx Svelte icon="code"
-<InfiniteScroll data="users" slot-element="#table-body">
+```jsx Svelte icon="s"
+<InfiniteScroll data="users" items-element="#table-body">
   <table>
     <thead>
       <tr><th>Name</th></tr>
@@ -538,7 +628,7 @@ You can also specify custom trigger elements for loading more content using CSS 
 ```html Vue icon="vuejs"
 <InfiniteScroll
   data="users"
-  slot-element="#table-body"
+  items-element="#table-body"
   start-element="#table-header"
   end-element="#table-footer"
 \>
@@ -561,7 +651,7 @@ You can also specify custom trigger elements for loading more content using CSS 
 ```jsx React icon="react"
 <InfiniteScroll
   data="users"
-  slotElement="#table-body"
+  itemsElement="#table-body"
   startElement="#table-header"
   endElement="#table-footer"
 \>
@@ -583,10 +673,10 @@ You can also specify custom trigger elements for loading more content using CSS 
 </InfiniteScroll>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 <InfiniteScroll
   data="users"
-  slot-element="#table-body"
+  items-element="#table-body"
   start-element="#table-header"
   end-element="#table-footer"
 \>
@@ -625,7 +715,7 @@ const tableBody = ref()
 <template>
   <InfiniteScroll
     data="users"
-    :slot-element="() => tableBody"
+    :items-element="() => tableBody"
     :start-element="() => tableHeader"
     :end-element="() => tableFooter"
 \>
@@ -657,7 +747,7 @@ export default ({ users }) => {
   return (
     <InfiniteScroll
       data="users"
-      slotElement={() => tableBody.current}
+      itemsElement={() => tableBody.current}
       startElement={() => tableHeader.current}
       endElement={() => tableFooter.current}
 \>
@@ -681,7 +771,7 @@ export default ({ users }) => {
 }
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 <script>
   import { InfiniteScroll } from '@inertiajs/svelte'
   export let users
@@ -693,7 +783,7 @@ export default ({ users }) => {
 
 <InfiniteScroll
   data="users"
-  slot-element={() => tableBody}
+  items-element={() => tableBody}
   start-element={() => tableHeader}
   end-element={() => tableFooter}
 \>
@@ -745,7 +835,7 @@ The infinite scroll component works within any scrollable container, not just th
 </div>
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 <div style="height: 400px; overflow-y: auto;">
   <InfiniteScroll data="users">
     {#each users.data as user (user.id)}
@@ -756,6 +846,27 @@ The infinite scroll component works within any scrollable container, not just th
 ```
 
 </CodeGroup>
+
+### Multiple scroll containers
+
+Sometimes you may need to render multiple infinite scroll components on a single page. However, if both components use the default `page` query parameter for [URL synchronization](#url-synchronization), they will conflict with each other. To resolve this, instruct each paginator to use a custom `pageName`.
+
+```php
+Route::get('/dashboard', function () {
+return Inertia::render('Dashboard', [
+'users' => Inertia::scroll(
+fn () => User::paginate(pageName: 'users')
+),
+'orders' => Inertia::scroll(
+fn () => Order::paginate(pageName: 'orders')
+),
+]);
+});
+```
+
+The `Inertia::scroll()` method automatically detects the `pageName` from each paginator, allowing both scroll containers to maintain independent pagination state. This results in URLs like `?users=2&orders=3` instead of conflicting `?page=` parameters.
+
+For more information about pagination page names, see [Laravel's documentation](https://laravel.com/docs/pagination#multiple-paginator-instances-per-page).
 
 ## Programmatic access
 
@@ -768,13 +879,13 @@ When you need to trigger loading actions programmatically, you may use a templat
 import { ref } from 'vue'
 const infiniteScrollRef = ref(null)
 
-const loadMore = () => {
-  infiniteScrollRef.value?.loadNext()
+const fetchNext = () => {
+  infiniteScrollRef.value?.fetchNext()
 }
 </script>
 
 <template>
-  <button @click="loadMore">Load More</button>
+  <button @click="fetchNext">Load More</button>
 
   <InfiniteScroll ref="infiniteScrollRef" data="users" manual>
     \<!-- Your content -->
@@ -789,13 +900,13 @@ import { useRef } from 'react'
 export default ({ users }) => {
   const infiniteScrollRef = useRef(null)
 
-  const loadMore = () => {
-    infiniteScrollRef.current?.loadNext()
+  const fetchNext = () => {
+    infiniteScrollRef.current?.fetchNext()
   }
 
   return (
     
-      <button onClick={loadMore}>Load More</button>
+      <button onClick={fetchNext}>Load More</button>
 
       <InfiniteScroll ref={infiniteScrollRef} data="users" manual>
         {users.data.map(user => (
@@ -807,19 +918,19 @@ export default ({ users }) => {
 }
 ```
 
-```jsx Svelte icon="code"
+```jsx Svelte icon="s"
 <script>
   import { InfiniteScroll } from '@inertiajs/svelte'
   export let users
 
   let infiniteScrollRef
 
-  const loadMore = () => {
-    infiniteScrollRef?.loadNext()
+  const fetchNext = () => {
+    infiniteScrollRef?.fetchNext()
   }
 </script>
 
-<button on:click={loadMore}>Load More</button>
+<button on:click={fetchNext}>Load More</button>
 
 <InfiniteScroll bind:this={infiniteScrollRef} data="users" manual>
   {#each users.data as user (user.id)}
@@ -832,8 +943,8 @@ export default ({ users }) => {
 
 The component exposes the following methods:
 
-- `loadNext()` - Manually load the next page
-- `loadPrevious()` - Manually load the previous page
+- `fetchNext()` - Manually fetch the next page
+- `fetchPrevious()` - Manually fetch the previous page
 - `hasNext()` - Whether there is a next page
 - `hasPrevious()` - Whether there is a previous page
 

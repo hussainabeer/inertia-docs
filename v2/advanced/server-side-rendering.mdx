@@ -2,11 +2,11 @@
 title: Server-side Rendering (SSR)
 ---
 
-import { VueSpecific } from "/snippets/vue-specific.jsx"
-import { ReactSpecific } from "/snippets/react-specific.jsx"
-import { Svelte5Specific } from "/snippets/svelte5-specific.jsx"
-import { Svelte4Specific } from "/snippets/svelte4-specific.jsx"
-import { SvelteSpecific } from "/snippets/svelte-specific.jsx"
+import { VueSpecific } from "/snippets/vue-specific.jsx";
+import { ReactSpecific } from "/snippets/react-specific.jsx";
+import { Svelte5Specific } from "/snippets/svelte5-specific.jsx";
+import { Svelte4Specific } from "/snippets/svelte4-specific.jsx";
+import { SvelteSpecific } from "/snippets/svelte-specific.jsx";
 
 Server-side rendering pre-renders your JavaScript pages on the server, allowing your visitors to receive fully rendered HTML when they visit your application. Since fully rendered HTML is served by your application, it's also easier for search engines to index your site.
 
@@ -34,7 +34,7 @@ npm install @vue/server-renderer
 // No additional dependencies required
 ```
 
-```js Svelte icon="code"
+```js Svelte icon="s"
 // No additional dependencies required
 ```
 
@@ -53,81 +53,85 @@ This file is going to look very similar to your `resources/js/app.js` file, exce
 <CodeGroup>
 
 ```js Vue icon="vuejs"
-import { createInertiaApp } from '@inertiajs/vue3'
-import createServer from '@inertiajs/vue3/server'
-import { renderToString } from '@vue/server-renderer'
-import { createSSRApp, h } from 'vue'
+import { createInertiaApp } from "@inertiajs/vue3";
+import createServer from "@inertiajs/vue3/server";
+import { renderToString } from "@vue/server-renderer";
+import { createSSRApp, h } from "vue";
 
-createServer(page =>
-  createInertiaApp({
-    page,
-    render: renderToString,
-    resolve: name => {
-      const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-      return pages[`./Pages/\${name}.vue`]
-    },
-    setup({ App, props, plugin }) {
-      return createSSRApp({
-        render: () => h(App, props),
-      }).use(plugin)
-    },
-  }),
-)
+createServer((page) =>
+    createInertiaApp({
+        page,
+        render: renderToString,
+        resolve: (name) => {
+            const pages = import.meta.glob("./Pages/**/*.vue", { eager: true });
+            return pages[`./Pages/\${name}.vue`];
+        },
+        setup({ App, props, plugin }) {
+            return createSSRApp({
+                render: () => h(App, props),
+            }).use(plugin);
+        },
+    }),
+);
 ```
 
 ```jsx React icon="react"
-import { createInertiaApp } from '@inertiajs/react'
-import createServer from '@inertiajs/react/server'
-import ReactDOMServer from 'react-dom/server'
+import { createInertiaApp } from "@inertiajs/react";
+import createServer from "@inertiajs/react/server";
+import ReactDOMServer from "react-dom/server";
 
-createServer(page =>
-  createInertiaApp({
-    page,
-    render: ReactDOMServer.renderToString,
-    resolve: name => {
-      const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
-      return pages[`./Pages/\${name}.jsx`]
-    },
-    setup: ({ App, props }) => <App {...props} />,
-  }),
-)
+createServer((page) =>
+    createInertiaApp({
+        page,
+        render: ReactDOMServer.renderToString,
+        resolve: (name) => {
+            const pages = import.meta.glob("./Pages/**/*.jsx", { eager: true });
+            return pages[`./Pages/\${name}.jsx`];
+        },
+        setup: ({ App, props }) => <App {...props} />,
+    }),
+);
 ```
 
-```js Svelte 4 icon="code"
-import { createInertiaApp } from '@inertiajs/svelte'
-import createServer from '@inertiajs/svelte/server'
+```js Svelte 4 icon="s"
+import { createInertiaApp } from "@inertiajs/svelte";
+import createServer from "@inertiajs/svelte/server";
 
-createServer(page =>
-  createInertiaApp({
-    page,
-    resolve: name => {
-      const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
-      return pages[`./Pages/\${name}.svelte`]
-    },
-    setup({ App, props }) {
-      return App.render(props)
-    },
-  }),
-)
+createServer((page) =>
+    createInertiaApp({
+        page,
+        resolve: (name) => {
+            const pages = import.meta.glob("./Pages/**/*.svelte", {
+                eager: true,
+            });
+            return pages[`./Pages/\${name}.svelte`];
+        },
+        setup({ App, props }) {
+            return App.render(props);
+        },
+    }),
+);
 ```
 
-```js Svelte 5 icon="code"
-import { createInertiaApp } from '@inertiajs/svelte'
-import createServer from '@inertiajs/svelte/server'
-import { render } from 'svelte/server'
+```js Svelte 5 icon="s"
+import { createInertiaApp } from "@inertiajs/svelte";
+import createServer from "@inertiajs/svelte/server";
+import { render } from "svelte/server";
 
-createServer(page =>
-  createInertiaApp({
-    page,
-    resolve: name => {
-      const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
-      return pages[`./Pages/\${name}.svelte`]
-    },
-    setup({ App, props }) {
-      return render(App, { props })
-    },
-  }),
-)
+createServer((page) =>
+    createInertiaApp({
+        page,
+        resolve: (name) => {
+            const pages = import.meta.glob("./Pages/**/*.svelte", {
+                eager: true,
+            });
+            return pages[`./Pages/\${name}.svelte`];
+        },
+        setup({ App, props }) {
+            return render(App, { props });
+        },
+    }),
+);
 ```
 
 </CodeGroup>
@@ -143,55 +147,59 @@ You can enable clustering by passing a second argument of options to `createServ
 <CodeGroup>
 
 ```js Vue icon="vuejs"
-import { createInertiaApp } from '@inertiajs/vue3'
-import createServer from '@inertiajs/vue3/server'
-import { renderToString } from '@vue/server-renderer'
-import { createSSRApp, h } from 'vue'
+import { createInertiaApp } from "@inertiajs/vue3";
+import createServer from "@inertiajs/vue3/server";
+import { renderToString } from "@vue/server-renderer";
+import { createSSRApp, h } from "vue";
 
-createServer(page =>
-  createInertiaApp({
-    // ...
-  }),
-  { cluster: true },
-)
+createServer(
+    (page) =>
+        createInertiaApp({
+            // ...
+        }),
+    { cluster: true },
+);
 ```
 
 ```jsx React icon="react"
-import { createInertiaApp } from '@inertiajs/react'
-import createServer from '@inertiajs/react/server'
-import ReactDOMServer from 'react-dom/server'
+import { createInertiaApp } from "@inertiajs/react";
+import createServer from "@inertiajs/react/server";
+import ReactDOMServer from "react-dom/server";
 
-createServer(page =>
-  createInertiaApp({
-    // ...
-  }),
-  { cluster: true },
-)
+createServer(
+    (page) =>
+        createInertiaApp({
+            // ...
+        }),
+    { cluster: true },
+);
 ```
 
-```js Svelte 4 icon="code"
-import { createInertiaApp } from '@inertiajs/svelte'
-import createServer from '@inertiajs/svelte/server'
+```js Svelte 4 icon="s"
+import { createInertiaApp } from "@inertiajs/svelte";
+import createServer from "@inertiajs/svelte/server";
 
-createServer(page =>
-  createInertiaApp({
-    // ...
-  }),
-  { cluster: true },
-)
+createServer(
+    (page) =>
+        createInertiaApp({
+            // ...
+        }),
+    { cluster: true },
+);
 ```
 
-```js Svelte 5 icon="code"
-import { createInertiaApp } from '@inertiajs/svelte'
-import createServer from '@inertiajs/svelte/server'
-import { render } from 'svelte/server'
+```js Svelte 5 icon="s"
+import { createInertiaApp } from "@inertiajs/svelte";
+import createServer from "@inertiajs/svelte/server";
+import { render } from "svelte/server";
 
-createServer(page =>
-  createInertiaApp({
-    // ...
-  }),
-  { cluster: true },
-)
+createServer(
+    (page) =>
+        createInertiaApp({
+            // ...
+        }),
+    { cluster: true },
+);
 ```
 
 </CodeGroup>
@@ -249,9 +257,27 @@ With the server running, you should be able to access your app within the browse
 
 ## Client side hydration
 
-Since your website is now being server-side rendered, you can instruct <VueSpecific>Vue</VueSpecific><ReactSpecific>React</ReactSpecific><SvelteSpecific>Svelte</SvelteSpecific> to "hydrate" the static markup and make it interactive instead of re-rendering all the HTML that we just generated.
+Since your website is now being server-side rendered, you can instruct CURRENT_CODE to "hydrate" the static markup and make it interactive instead of re-rendering all the HTML that we just generated.
 
-<VueSpecific>To enable client-side hydration in a Vue app, update your `ssr.js` file to use `createSSRApp` instead of `createApp`.</VueSpecific><ReactSpecific>To enable client-side hydration in a React app, update your `ssr.js` file to use `hydrateRoot` instead of `createRoot`.</ReactSpecific><Svelte4Specific>To enable client-side hydration in a Svelte 4 app, set the `hydrate` option to `true` in your `ssr.js` file.</Svelte4Specific><Svelte5Specific>To enable client-side hydration in a Svelte 5 app, update your `ssr.js` file to use `hydrate` instead of `mount` when server rendering.</Svelte5Specific>
+<VueSpecific>
+    To enable client-side hydration in a Vue app, update your `ssr.js` file to
+    use `createSSRApp` instead of `createApp`.
+</VueSpecific>
+
+<ReactSpecific>
+    To enable client-side hydration in a React app, update your `ssr.js` file to
+    use `hydrateRoot` instead of `createRoot`.
+</ReactSpecific>
+
+<Svelte4Specific>
+    To enable client-side hydration in a Svelte 4 app, set the `hydrate` option
+    to `true` in your `ssr.js` file.
+</Svelte4Specific>
+
+<Svelte5Specific>
+    To enable client-side hydration in a Svelte 5 app, update your `ssr.js` file
+    to use `hydrate` instead of `mount` when server rendering.
+</Svelte5Specific>
 
 <CodeGroup>
 
@@ -291,7 +317,7 @@ Since your website is now being server-side rendered, you can instruct <VueSpeci
   })
 ```
 
-```diff Svelte 4 icon="code"
+```diff Svelte 4 icon="s"
    import { createInertiaApp } from '@inertiajs/svelte'
 
    createInertiaApp({
@@ -306,7 +332,7 @@ Since your website is now being server-side rendered, you can instruct <VueSpeci
    })
 ```
 
-```diff Svelte 5 icon="code"
+```diff Svelte 5 icon="s"
    import { createInertiaApp } from '@inertiajs/svelte'
 \-  import { mount } from 'svelte'
 \+  import { hydrate, mount } from 'svelte'
@@ -329,7 +355,9 @@ Since your website is now being server-side rendered, you can instruct <VueSpeci
 
 </CodeGroup>
 
-<Svelte4Specific>You will also need to set the `hydratable` compiler option to `true` in your `vite.config.js` file:
+<Svelte4Specific>
+
+You will also need to set the `hydratable` compiler option to `true` in your `vite.config.js` file:
 
 ```diff
   import { svelte } from '@sveltejs/vite-plugin-svelte'
@@ -351,7 +379,11 @@ Since your website is now being server-side rendered, you can instruct <VueSpeci
 \+     }),
     ],
   })
-```</Svelte4Specific>## Deployment
+```
+
+</Svelte4Specific>
+
+## Deployment
 
 When deploying your SSR enabled app to production, you'll need to build both the client-side ( `app.js`) and server-side bundles (`ssr.js`), and then run the SSR server as a background process, typically using a process monitoring tool such as Supervisor.
 

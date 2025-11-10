@@ -42,7 +42,7 @@ class UsersController extends Controller
 
 However, when using Laravel, the [Ziggy](https://github.com/tighten/ziggy) library can make your named, server-side routes available to you via a global `route()` function. In fact, if you are developing an application using one of Laravel's [starter kits](https://laravel.com/docs/starter-kits), Ziggy is already configured for you.
 
-If you're using the Vue plugin included with Ziggy, you may use the `route()`function directly in your templates.
+If you're using the Vue plugin included with Ziggy, you may use the `route()` function directly in your templates.
 
 ```html
 <a :href="route('users.create')">Create User</a>
@@ -61,7 +61,7 @@ location: new URL(page.props.ziggy.location),
 
 The [page object](/the-protocol#the-page-object) includes a `url` that represents the current page's URL. By default, the Laravel adapter resolves this using the `fullUrl()` method on the `Request` instance, but strips the scheme and host so the result is a relative URL.
 
-If you need to customize how the URL is resolved, you may provide a resolver within the `urlResolver` method of the Inertia `HandleInertiaRequests` middleware.
+If you need to customize how the URL is resolved, you may provide a resolver within the `urlResolver`method of the Inertia `HandleInertiaRequests` middleware.
 
 ```php
 class HandleInertiaRequests extends Middleware
