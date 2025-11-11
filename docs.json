@@ -8,6 +8,20 @@
         "dark": "#2563EB"
     },
     "favicon": "/favicon.svg",
+    "fonts": {
+        "heading": {
+            "family": "Inter Variable",
+            "source": "/fonts/inter/InterVariable.woff2",
+            "format": "woff2",
+            "weight": 600
+        },
+        "body": {
+            "family": "Inter Variable",
+            "source": "/fonts/inter/InterVariable.woff2",
+            "format": "woff2",
+            "weight": 400
+        }
+    },
     "navigation": {
         "global": {},
         "versions": [
