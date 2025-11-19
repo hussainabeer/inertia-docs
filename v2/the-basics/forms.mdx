@@ -14,7 +14,7 @@ Inertia provides a `<Form>` component that behaves much like a classic HTML form
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 <script setup>
 import { Form } from '@inertiajs/vue3'
 </script>
@@ -60,7 +60,7 @@ The component also supports nested data structures, file uploads, and dotted key
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 <Form action="/reports" method="post">
   <input type="text" name="name" />
   <textarea name="report[description]"></textarea>
@@ -96,7 +96,7 @@ You can pass a `transform` prop to modify the form data before submission. This 
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 <Form
   action="/posts"
   method="post"
@@ -137,7 +137,7 @@ When using [Wayfinder](https://github.com/laravel/wayfinder), you can pass the r
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 <script setup>
 import { Form } from '@inertiajs/vue3'
 import { store } from 'App/Http/Controllers/UserController'
@@ -186,7 +186,7 @@ You can set default values for form inputs using standard HTML attributes. Use <
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 <Form action="/users" method="post">
   <input type="text" name="name" defaultValue="John Doe" />
 
@@ -246,7 +246,7 @@ The `<Form>` component exposes reactive state and helper methods through its def
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 <Form
   action="/users"
   method="post"
@@ -388,7 +388,7 @@ The `errors` object uses dotted notation for nested fields, allowing you to disp
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 <Form action="/users" method="post" #default="{ errors }">
   <input type="text" name="user.name" />
   <div v-if="errors['user.name']">{{ errors['user.name'] }}</div>
@@ -434,7 +434,7 @@ In addition to `action` and `method`, the `<Form>` component accepts several pro
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 <Form
   action="/profile"
   method="put"
@@ -548,7 +548,7 @@ The `<Form>` component emits all the standard visit [events](/v2/advanced/events
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 <Form
   action="/users"
   method="post"
@@ -630,7 +630,7 @@ The `Form` component provides several attributes that allow you to reset the for
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 <!-- Reset the entire form on success -->
 <Form action="/users" method="post" resetOnSuccess>
   <input type="text" name="name" />
@@ -684,7 +684,7 @@ The `Form` component provides several attributes that allow you to reset the for
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 <!-- Reset the entire form on success -->
 <Form action="/users" method="post" resetOnError>
   <input type="text" name="name" />
@@ -740,7 +740,7 @@ The `Form` component provides the `setDefaultsOnSuccess` attribute to set the cu
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 <Form action="/users" method="post" setDefaultsOnSuccess>
   <input type="text" name="name" />
   <input type="email" name="email" />
@@ -772,7 +772,7 @@ The `<Form>` component supports dotted key notation for creating nested objects 
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 <Form action="/users" method="post">
   <input type="text" name="user.name" />
   <input type="text" name="user.skills[]" />
@@ -819,7 +819,7 @@ If you need literal dots in your field names (not as nested object separators), 
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 <Form action="/config" method="post">
   <input type="text" name="app\.name" />
   <input type="text" name="settings.theme\.mode" />
@@ -862,7 +862,7 @@ You can access the form's methods programmatically using refs. This provides an 
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 <script setup>
 import { ref } from 'vue'
 import { Form } from '@inertiajs/vue3'
@@ -937,7 +937,7 @@ In addition to the `<Form>` component, Inertia also provides a `useForm` helper 
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 <script setup>
 import { useForm } from '@inertiajs/vue3'
 
@@ -1019,7 +1019,7 @@ return (
 </form>
 ```
 
-```jsx Svelte 5 icon="s"
+```svelte Svelte 5 icon="s"
 <script>
   import { useForm } from '@inertiajs/svelte'
 
@@ -1162,7 +1162,7 @@ const { processing } = useForm({ ... })
 <button type="submit" disabled={processing}>Submit</button>
 ```
 
-```jsx Svelte icon="s"
+```svelte Svelte icon="s"
 <button type="submit" disabled={$form.processing}>Submit</button>
 ```
 
@@ -1188,7 +1188,7 @@ const { progress } = useForm({ ... })
 )}
 ```
 
-```jsx Svelte icon="s"
+```svelte Svelte icon="s"
 {#if $form.progress}
   <progress value={$form.progress.percentage} max="100">
     {$form.progress.percentage}%
@@ -1214,7 +1214,7 @@ const { errors } = useForm({ ... })
 {errors.email && <div>{errors.email}</div>}
 ```
 
-```jsx Svelte icon="s"
+```svelte Svelte icon="s"
 {#if $form.errors.email}
   <div>{$form.errors.email}</div>
 {/if}
@@ -1427,7 +1427,7 @@ To determine if a form has any changes, you may use the `isDirty` property.
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 <div v-if="form.isDirty">There are unsaved form changes.</div>
 ```
 
@@ -1585,7 +1585,7 @@ It's also possible to submit forms manually using Inertia's `router` methods dir
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 <script setup>
 import { reactive } from 'vue'
 import { router } from '@inertiajs/vue3'

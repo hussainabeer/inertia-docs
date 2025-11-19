@@ -10,7 +10,7 @@ While it's possible to make classic HTML form submissions with Inertia, it's not
 
 <CodeGroup>
 
-```html Vue 2
+```vue Vue 2
 <template>
   <form @submit.prevent="submit">
     <label for="first_name">First name:</label>
@@ -45,7 +45,7 @@ export default {
 </script>
 ```
 
-```html Vue 3
+```vue Vue 3
 <script setup>
 import { reactive } from 'vue'
 import { router } from '@inertiajs/vue3'
@@ -185,7 +185,7 @@ Since working with forms is so common, Inertia includes a form helper designed t
 
 <CodeGroup>
 
-```html Vue 2
+```vue Vue 2
 <template>
   <form @submit.prevent="form.post('/login')">
     <!-- email -->
@@ -218,7 +218,7 @@ export default {
 </script>
 ```
 
-```html Vue 3
+```vue Vue 3
 <script setup>
 import { useForm } from '@inertiajs/vue3'
 
@@ -442,7 +442,7 @@ const { processing } = useForm({ ... })
 <button type="submit" disabled={processing}>Submit</button>
 ```
 
-```jsx Svelte icon="s"
+```svelte Svelte icon="s"
 <button type="submit" disabled={$form.processing}>Submit</button>
 ```
 
@@ -474,7 +474,7 @@ const { progress } = useForm({ ... })
 )}
 ```
 
-```jsx Svelte icon="s"
+```svelte Svelte icon="s"
 {#if $form.progress}
   <progress value={$form.progress.percentage} max="100">
     {$form.progress.percentage}%
@@ -502,7 +502,7 @@ const { errors } = useForm({ ... })
 {errors.email && <div>{errors.email}</div>}
 ```
 
-```jsx Svelte icon="s"
+```svelte Svelte icon="s"
 {#if $form.errors.email}
   <div>{$form.errors.email}</div>
 {/if}
@@ -716,11 +716,11 @@ To determine if a form has any changes, you may use the `isDirty` property.
 
 <CodeGroup>
 
-```html Vue 2
+```vue Vue 2
 <div v-if="form.isDirty">There are unsaved form changes.</div>
 ```
 
-```html Vue 3
+```vue Vue 3
 <div v-if="form.isDirty">There are unsaved form changes.</div>
 ```
 

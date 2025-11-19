@@ -59,7 +59,7 @@ You may have noticed we're returning an `ErrorPage` page component in the exampl
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 <script setup>
 import { computed } from 'vue'
 
@@ -117,7 +117,7 @@ export default function ErrorPage({ status }) {
 }
 ```
 
-```jsx Svelte 4 icon="s"
+```svelte Svelte 4 icon="s"
 <script>
   export let status
 
@@ -142,7 +142,7 @@ export default function ErrorPage({ status }) {
 </div>
 ```
 
-```jsx Svelte 5 icon="s"
+```svelte Svelte 5 icon="s"
 <script>
   let { status } = $props()
 

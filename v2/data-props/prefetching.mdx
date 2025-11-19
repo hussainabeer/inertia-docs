@@ -10,20 +10,20 @@ To prefetch data for a page, you can add the `prefetch` prop to the Inertia link
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 import { Link } from '@inertiajs/vue3'
 
-<a href="/users" prefetch>Users</a>
+<Link href="/users" prefetch>Users</Link>
 ```
 
 ```jsx React icon="react"
 import { Link } from '@inertiajs/react'
 
-<a href="/users" prefetch>Users</a>
+<Link href="/users" prefetch>Users</Link>
 ```
 
-```jsx Svelte icon="s"
-import { inerta } from '@inertiajs/svelte'
+```svelte Svelte icon="s"
+import { inertia } from '@inertiajs/svelte'
 
 <a href="/users" use:inertia={{ prefetch: true }}>Users</a>
 ```
@@ -34,23 +34,23 @@ By default, data is cached for 30 seconds before being evicted. You may customiz
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 import { Link } from '@inertiajs/vue3'
 
-<a href="/users" prefetch cache-for="1m">Users</a>
-<a href="/users" prefetch cache-for="10s">Users</a>
-<a href="/users" prefetch :cache-for="5000">Users</a>
+<Link href="/users" prefetch cache-for="1m">Users</Link>
+<Link href="/users" prefetch cache-for="10s">Users</Link>
+<Link href="/users" prefetch :cache-for="5000">Users</Link>
 ```
 
 ```jsx React icon="react"
 import { Link } from '@inertiajs/react'
 
-<a href="/users" prefetch cacheFor="1m">Users</a>
-<a href="/users" prefetch cacheFor="10s">Users</a>
-<a href="/users" prefetch cacheFor={5000}>Users</a>
+<Link href="/users" prefetch cacheFor="1m">Users</Link>
+<Link href="/users" prefetch cacheFor="10s">Users</Link>
+<Link href="/users" prefetch cacheFor={5000}>Users</Link>
 ```
 
-```jsx Svelte icon="s"
+```svelte Svelte icon="s"
 import { inertia } from '@inertiajs/svelte'
 
 <a href="/users" use:inertia={{ prefetch: true, cacheFor: '1m' }}>Users</a>
@@ -64,19 +64,19 @@ Instead of prefetching on hover, you can also start prefetching on `mousedown` b
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 import { Link } from '@inertiajs/vue3'
 
-<a href="/users" prefetch="click">Users</a>
+<Link href="/users" prefetch="click">Users</Link>
 ```
 
 ```jsx React icon="react"
 import { Link } from '@inertiajs/react'
 
-<a href="/users" prefetch="click">Users</a>
+<Link href="/users" prefetch="click">Users</Link>
 ```
 
-```jsx Svelte icon="s"
+```svelte Svelte icon="s"
 import { inertia } from '@inertiajs/svelte'
 
 <a href="/users" use:inertia={{ prefetch: 'click' }}>Users</a>
@@ -88,7 +88,7 @@ If you're confident that the user will visit a page next, you can prefetch the d
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 import { Link } from '@inertiajs/vue3'
 
 <a href="/users" prefetch="mount">Users</a>
@@ -100,7 +100,7 @@ import { Link } from '@inertiajs/react'
 <a href="/users" prefetch="mount">Users</a>
 ```
 
-```jsx Svelte icon="s"
+```svelte Svelte icon="s"
 import { inerta } from '@inertiajs/svelte'
 
 <a href="/users" use:inertia={{ prefetch: 'mount' }}>Users</a>
@@ -112,7 +112,7 @@ You can also combine prefetch strategies by passing an array of values to the `p
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 import { Link } from '@inertiajs/vue3'
 
 <a href="/users" :prefetch="['mount', 'hover']">Users</a>
@@ -124,7 +124,7 @@ import { Link } from '@inertiajs/react'
 <a href="/users" prefetch={['mount', 'hover']}>Users</a>
 ```
 
-```jsx Svelte icon="s"
+```svelte Svelte icon="s"
 import { inertia } from '@inertiajs/svelte'
 
 <a href="/users" use:inertia={{ prefetch: ['mount', 'hover'] }}>Users</a>
@@ -213,25 +213,25 @@ To tag cached data, pass a `cacheTags` prop to your `Link` component.
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 <script setup>
 import { Link } from '@inertiajs/vue3'
 </script>
 
 <template>
-  <a href="/users" prefetch cache-tags="users">Users</a>
-  <a href="/dashboard" prefetch :cache-tags="['dashboard', 'stats']">Dashboard</a>
+  <Link href="/users" prefetch cache-tags="users">Users</Link>
+  <Link href="/dashboard" prefetch :cache-tags="['dashboard', 'stats']">Dashboard</Link>
 </template>
 ```
 
 ```jsx React icon="react"
 import { Link } from '@inertiajs/react'
 
-<a href="/users" prefetch cacheTags="users">Users</a>
-<a href="/dashboard" prefetch cacheTags={['dashboard', 'stats']}>Dashboard</a>
+<Link href="/users" prefetch cacheTags="users">Users</Link>
+<Link href="/dashboard" prefetch cacheTags={['dashboard', 'stats']}>Dashboard</Link>
 ```
 
-```jsx Svelte icon="s"
+```svelte Svelte icon="s"
 import { inertia } from '@inertiajs/svelte'
 
 <a href="/users" use:inertia={{ prefetch: true, cacheTags: 'users' }}>Users</a>
@@ -307,7 +307,7 @@ To automatically invalidate caches when making requests, pass an `invalidateCach
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 <script setup>
 import { Form } from '@inertiajs/vue3'
 </script>
@@ -402,7 +402,13 @@ function submit() {
 You can also invalidate cache tags with programmatic visits by including `invalidateCacheTags` in the options.
 
 ```js
-router.delete(`/users/${userId}\
+router.delete(`/users/${userId}`, {}, {
+  invalidateCacheTags: ['users', 'dashboard']
+})
+
+router.post('/posts', postData, {
+  invalidateCacheTags: ['posts', 'recent-posts']
+})
 ```
 
 ## Stale while revalidate
@@ -413,19 +419,19 @@ The first value in the array represents the number of seconds the cache is consi
 
 <CodeGroup>
 
-```html Vue icon="vuejs"
+```vue Vue icon="vuejs"
 import { Link } from '@inertiajs/vue3'
 
-<a href="/users" prefetch :cacheFor="['30s', '1m']">Users</a>
+<Link href="/users" prefetch :cacheFor="['30s', '1m']">Users</Link>
 ```
 
 ```jsx React icon="react"
 import { Link } from '@inertiajs/react'
 
-<a href="/users" prefetch cacheFor={['30s', '1m']}>Users</a>
+<Link href="/users" prefetch cacheFor={['30s', '1m']}>Users</Link>
 ```
 
-```jsx Svelte icon="s"
+```svelte Svelte icon="s"
 import { inertia } from '@inertiajs/svelte'
 
 <a href="/users" use:inertia={{ prefetch: true, cacheFor: ['30s', '1m'] }}>Users</a>
