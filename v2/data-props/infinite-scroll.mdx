@@ -10,9 +10,9 @@ To configure your paginated data for infinite scrolling, you should use the `Ine
 
 ```php
 Route::get('/users', function () {
-return Inertia::render('Users/Index', [
-'users' => Inertia::scroll(fn () => User::paginate())
-]);
+    return Inertia::render('Users/Index', [
+        'users' => Inertia::scroll(fn () => User::paginate())
+    ]);
 });
 ```
 
@@ -25,11 +25,19 @@ On the client side, Inertia provides the `<InfiniteScroll>` component to automat
 <CodeGroup>
 
 ```vue Vue icon="vuejs"
-<InfiniteScroll data="users">
-  <div v-for="user in users.data" :key="user.id">
-    {{ user.name }}
-  </div>
-</InfiniteScroll>
+<script setup>
+import { InfiniteScroll } from '@inertiajs/vue3'
+
+defineProps(['users'])
+</script>
+
+<template>
+    <InfiniteScroll data="users">
+        <div v-for="user in users.data" :key="user.id">
+            {{ user.name }}
+        </div>
+    </InfiniteScroll>
+</template>
 ```
 
 ```jsx React icon="react"
@@ -331,21 +339,23 @@ Manual mode disables automatic loading when scrolling and allows you to control 
 <CodeGroup>
 
 ```vue Vue icon="vuejs"
-<InfiniteScroll data="users" manual>
-  <template #previous="{ loading, fetch, hasMore }">
-    <button v-if="hasMore" @click="fetch" :disabled="loading">
-      {{ loading ? 'Loading...' : 'Load previous' }}
-    </button>
-  </template>
+<template>
+    <InfiniteScroll data="users" manual>
+        <template #previous="{ loading, fetch, hasMore }">
+            <button v-if="hasMore" @click="fetch" :disabled="loading">
+                {{ loading ? 'Loading...' : 'Load previous' }}
+            </button>
+        </template>
 
-  <!-- Your content -->
+        <!-- Your content -->
 
-  <template #next="{ loading, fetch, hasMore }">
-    <button v-if="hasMore" @click="fetch" :disabled="loading">
-      {{ loading ? 'Loading...' : 'Load more' }}
-    </button>
-  </template>
-</InfiniteScroll>
+        <template #next="{ loading, fetch, hasMore }">
+            <button v-if="hasMore" @click="fetch" :disabled="loading">
+                {{ loading ? 'Loading...' : 'Load more' }}
+            </button>
+        </template>
+    </InfiniteScroll>
+</template>
 ```
 
 ```jsx React icon="react"
@@ -369,7 +379,7 @@ export default ({ users }) => (
         </button>
       )
     )}
-\>
+  >
     {users.data.map(user => (
       <div key={user.id}>{user.name}</div>
     ))}
@@ -471,12 +481,15 @@ The loading slot is used as a fallback when loading content and no custom `befor
 <CodeGroup>
 
 ```vue Vue icon="vuejs"
-<InfiniteScroll data="users">
-  <!-- Your content -->
-  <template #loading>
-    Loading more users...
-  </template>
-</InfiniteScroll>
+<template>
+    <InfiniteScroll data="users">
+        <!-- Your content -->
+
+        <template #loading>
+            Loading more users...
+        </template>
+    </InfiniteScroll>
+</template>
 ```
 
 ```jsx React icon="react"
@@ -487,10 +500,11 @@ The loading slot is used as a fallback when loading content and no custom `befor
 
 ```svelte Svelte icon="s"
 <InfiniteScroll data="users">
-  <!-- Your content -->
-  <div slot="loading">
-    Loading more users...
-  </div>
+    <!-- Your content -->
+
+    <div slot="loading">
+        Loading more users...
+    </div>
 </InfiniteScroll>
 ```
 
@@ -500,33 +514,39 @@ The loading slot is used as a fallback when loading content and no custom `befor
 
 The `previous` and `next` slots are rendered above and below the main content, typically used for manual load controls. These slots receive several properties including loading states, fetch functions, and mode indicators.
 
-```html
-<InfiniteScroll data="users" :manual-after="3">
-<template #previous="{ loading, fetch, hasMore, manualMode }">
-<button v-if="manualMode && hasMore" @click="fetch" :disabled="loading">
-{{ loading ? 'Loading...' : 'Load previous' }}
-</button>
+```vue
+<template>
+    <InfiniteScroll data="users" :manual-after="3">
+        <template #previous="{ loading, fetch, hasMore, manualMode }">
+            <button v-if="manualMode && hasMore" @click="fetch" :disabled="loading">
+                {{ loading ? 'Loading...' : 'Load previous' }}
+            </button>
+        </template>
+
+        <!-- Your content -->
+
+        <template #next="{ loading, fetch, hasMore, manualMode }">
+            <button v-if="manualMode && hasMore" @click="fetch" :disabled="loading">
+                {{ loading ? 'Loading...' : 'Load more' }}
+            </button>
+        </template>
+    </InfiniteScroll>
 </template>
-<!-- Your content -->
-<template #next="{ loading, fetch, hasMore, manualMode }">
-<button v-if="manualMode && hasMore" @click="fetch" :disabled="loading">
-{{ loading ? 'Loading...' : 'Load more' }}
-</button>
-</template>
-</InfiniteScroll>
 ```
 
 The `loading`, `previous`, and `next` slots receive the following properties:
 
-- `loading` - Whether the slot is currently loading content
-- `loadingPrevious` - Whether previous content is loading
-- `loadingNext` - Whether next content is loading
-- `fetch` - Function to trigger loading for the slot
-- `hasMore` - Whether more content is available for the slot
-- `hasPrevious` - Whether more previous content is available
-- `hasNext` - Whether more next content is available
-- `manualMode` - Whether manual mode is active
-- `autoMode` - Whether automatic loading is active
+| Property          | Description                                         |
+|:------------------|:----------------------------------------------------|
+| `loading`         | Whether the slot is currently loading content       |
+| `loadingPrevious` | Whether previous content is loading                 |
+| `loadingNext`     | Whether next content is loading                     |
+| `fetch`           | Function to trigger loading for the slot            |
+| `hasMore`         | Whether more content is available for the slot      |
+| `hasPrevious`     | Whether more previous content is available          |
+| `hasNext`         | Whether more next content is available              |
+| `manualMode`      | Whether manual mode is active                       |
+| `autoMode`        | Whether automatic loading is active                 |
 
 ## Custom element
 
@@ -535,28 +555,30 @@ The `InfiniteScroll` component renders as a `<div>` element. You may customize t
 <CodeGroup>
 
 ```vue Vue icon="vuejs"
-<InfiniteScroll data="products" as="ul">
-  <li v-for="product in products.data" :key="product.id">
-    {{ product.name }}
-  </li>
-</InfiniteScroll>
+<template>
+    <InfiniteScroll data="products" as="ul">
+        <li v-for="product in products.data" :key="product.id">
+            {{ product.name }}
+        </li>
+    </InfiniteScroll>
+</template>
 ```
 
 ```jsx React icon="react"
 <InfiniteScroll data="products" as="ul">
-  {products.data.map(product => (
-    <li key={product.id}>
-      {product.name}
-    </li>
-  ))}
+    {products.data.map(product => (
+        <li key={product.id}>
+            {product.name}
+        </li>
+    ))}
 </InfiniteScroll>
 ```
 
 ```svelte Svelte icon="s"
 <InfiniteScroll data="products" as="ul">
-  {#each products.data as product (product.id)}
-    <li>{product.name}</li>
-  {/each}
+    {#each products.data as product (product.id)}
+        <li>{product.name}</li>
+    {/each}
 </InfiniteScroll>
 ```
 
@@ -569,51 +591,53 @@ The infinite scroll component automatically tracks content and assigns page numb
 <CodeGroup>
 
 ```vue Vue icon="vuejs"
-<InfiniteScroll data="users" items-element="#table-body">
-  <table>
-    <thead>
-      <tr><th>Name</th></tr>
-    </thead>
-    <tbody id="table-body">
-      <tr v-for="user in users.data" :key="user.id">
-        <td>{{ user.name }}</td>
-      </tr>
-    </tbody>
-  </table>
-</InfiniteScroll>
+<template>
+    <InfiniteScroll data="users" items-element="#table-body">
+        <table>
+            <thead>
+                <tr><th>Name</th></tr>
+            </thead>
+            <tbody id="table-body">
+                <tr v-for="user in users.data" :key="user.id">
+                    <td>{{ user.name }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </InfiniteScroll>
+</template>
 ```
 
 ```jsx React icon="react"
 <InfiniteScroll data="users" itemsElement="#table-body">
-  <table>
-    <thead>
-      <tr><th>Name</th></tr>
-    </thead>
-    <tbody id="table-body">
-      {users.data.map(user => (
-        <tr key={user.id}>
-          <td>{user.name}</td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
+    <table>
+        <thead>
+            <tr><th>Name</th></tr>
+        </thead>
+        <tbody id="table-body">
+            {users.data.map(user => (
+                <tr key="{user.id}">
+                    <td>{user.name}</td>
+                </tr>
+            ))}
+        </tbody>
+    </table>
 </InfiniteScroll>
 ```
 
 ```svelte Svelte icon="s"
 <InfiniteScroll data="users" items-element="#table-body">
-  <table>
-    <thead>
-      <tr><th>Name</th></tr>
-    </thead>
-    <tbody id="table-body">
-      {#each users.data as user (user.id)}
-        <tr>
-          <td>{user.name}</td>
-        </tr>
-      {/each}
-    </tbody>
-  </table>
+    <table>
+        <thead>
+            <tr><th>Name</th></tr>
+        </thead>
+        <tbody id="table-body">
+            {#each users.data as user (user.id)}
+            <tr>
+                <td>{user.name}</td>
+            </tr>
+            {/each}
+        </tbody>
+    </table>
 </InfiniteScroll>
 ```
 
@@ -626,26 +650,28 @@ You can also specify custom trigger elements for loading more content using CSS 
 <CodeGroup>
 
 ```vue Vue icon="vuejs"
-<InfiniteScroll
-  data="users"
-  items-element="#table-body"
-  start-element="#table-header"
-  end-element="#table-footer"
-\>
-  <table>
-    <thead id="table-header">
-      <tr><th>Name</th></tr>
-    </thead>
-    <tbody id="table-body">
-      <tr v-for="user in users.data" :key="user.id">
-        <td>{{ user.name }}</td>
-      </tr>
-    </tbody>
-    <tfoot id="table-footer">
-      <tr><td>Footer</td></tr>
-    </tfoot>
-  </table>
-</InfiniteScroll>
+<template>
+    <InfiniteScroll
+        data="users"
+        items-element="#table-body"
+        start-element="#table-header"
+        end-element="#table-footer"
+        >
+        <table>
+            <thead id="table-header">
+                <tr><th>Name</th></tr>
+            </thead>
+            <tbody id="table-body">
+                <tr v-for="user in users.data" :key="user.id">
+                    <td>{{ user.name }}</td>
+                </tr>
+            </tbody>
+            <tfoot id="table-footer">
+                <tr><td>Footer</td></tr>
+            </tfoot>
+        </table>
+    </InfiniteScroll>
+</template>
 ```
 
 ```jsx React icon="react"
@@ -654,7 +680,7 @@ You can also specify custom trigger elements for loading more content using CSS 
   itemsElement="#table-body"
   startElement="#table-header"
   endElement="#table-footer"
-\>
+>
   <table>
     <thead id="table-header">
       <tr><th>Name</th></tr>
@@ -679,7 +705,7 @@ You can also specify custom trigger elements for loading more content using CSS 
   items-element="#table-body"
   start-element="#table-header"
   end-element="#table-footer"
-\>
+>
   <table>
     <thead id="table-header">
       <tr><th>Name</th></tr>
@@ -718,7 +744,7 @@ const tableBody = ref()
     :items-element="() => tableBody"
     :start-element="() => tableHeader"
     :end-element="() => tableFooter"
-\>
+  >
     <table>
       <thead ref="tableHeader">
         <tr><th>Name</th></tr>
@@ -750,7 +776,7 @@ export default ({ users }) => {
       itemsElement={() => tableBody.current}
       startElement={() => tableHeader.current}
       endElement={() => tableFooter.current}
-\>
+>
       <table>
         <thead ref={tableHeader}>
           <tr><th>Name</th></tr>
@@ -786,7 +812,7 @@ export default ({ users }) => {
   items-element={() => tableBody}
   start-element={() => tableHeader}
   end-element={() => tableFooter}
-\>
+>
   <table>
     <thead bind:this={tableHeader}>
       <tr><th>Name</th></tr>
@@ -814,17 +840,19 @@ The infinite scroll component works within any scrollable container, not just th
 <CodeGroup>
 
 ```vue Vue icon="vuejs"
-<div style="height: 400px; overflow-y: auto;">
-  <InfiniteScroll data="users">
-    <div v-for="user in users.data" :key="user.id">
-      {{ user.name }}
+<template>
+    <div style="height: 400px; overflow-y: auto;">
+        <InfiniteScroll data="users">
+            <div v-for="user in users.data" :key="user.id">
+                {{ user.name }}
+            </div>
+        </InfiniteScroll>
     </div>
-  </InfiniteScroll>
-</div>
+</template>
 ```
 
 ```jsx React icon="react"
-<div >
+<div style={{ height: '400px', overflowY: 'auto' }}>
   <InfiniteScroll data="users">
     {users.data.map(user => (
       <div key={user.id}>
@@ -853,14 +881,14 @@ Sometimes you may need to render multiple infinite scroll components on a single
 
 ```php
 Route::get('/dashboard', function () {
-return Inertia::render('Dashboard', [
-'users' => Inertia::scroll(
-fn () => User::paginate(pageName: 'users')
-),
-'orders' => Inertia::scroll(
-fn () => Order::paginate(pageName: 'orders')
-),
-]);
+    return Inertia::render('Dashboard', [
+        'users' => Inertia::scroll(
+            fn() => User::paginate(pageName: 'users')
+        ),
+        'orders' => Inertia::scroll(
+            fn() => Order::paginate(pageName: 'orders')
+        ),
+    ]);
 });
 ```
 
@@ -957,6 +985,7 @@ The `Inertia::scroll()` method provides server-side configuration for infinite s
 Inertia::scroll(User::paginate(20));
 Inertia::scroll(User::simplePaginate(20));
 Inertia::scroll(User::cursorPaginate(20));
+
 // Works with API resources...
 Inertia::scroll(UserResource::collection(User::paginate(20)));
 ```
@@ -966,6 +995,7 @@ If you don't use Laravel's paginator or use a different transformation layer, yo
 ```php
 // Customize the data wrapper key (defaults to 'data')...
 Inertia::scroll($customPaginatedData, wrapper: 'items');
+
 // Provide custom metadata resolution...
 Inertia::scroll($data, metadata: $metadataProvider);
 ```
@@ -974,13 +1004,14 @@ The metadata parameter accepts an instance of `ProvidesScrollMetadata` or a call
 
 ```php
 use League\Fractal\Resource\Collection;
+
 class FractalScrollMetadata implements ProvidesScrollMetadata
 {
-public function __construct(protected Collection $resource) {}
-public function getPageName(): string {}
-public function getPreviousPage(): int|string|null {}
-public function getNextPage(): int|string|null {}
-public function getCurrentPage(): int|string|null {}
+    public function __construct(protected Collection $resource) {}
+    public function getPageName(): string {}
+    public function getPreviousPage(): int|string|null {}
+    public function getNextPage(): int|string|null {}
+    public function getCurrentPage(): int|string|null {}
 }
 ```
 
@@ -989,10 +1020,11 @@ You may then use this custom metadata provider in your scroll function.
 ```php
 // Using an instance directly
 Inertia::scroll($data, metadata: new FractalScrollMetadata($data));
+
 // Using a callback
 Inertia::scroll(
-fn () => $this->transformData($data),
-metadata: fn ($data) => new FractalScrollMetadata($data)
+    fn() => $this->transformData($data),
+    metadata: fn($data) => new FractalScrollMetadata($data)
 );
 ```
 
@@ -1001,13 +1033,14 @@ To avoid repeating this setup in multiple controllers, you may define a macro.
 ```php
 // In your AppServiceProvider's boot method
 Inertia::macro('fractalScroll', function (Collection $data) {
-return Inertia::scroll(
-$data,
-metadata: fn (Collection $data) => new FractalScrollMetadata($data)
-);
+    return Inertia::scroll(
+        $data,
+        metadata: fn(Collection $data) => new FractalScrollMetadata($data)
+    );
 });
+
 // Then use it in your controllers
 return Inertia::render('Users/Index', [
-'users' => Inertia::fractalScroll($fractalCollection)
+    'users' => Inertia::fractalScroll($fractalCollection)
 ]);
 ```
