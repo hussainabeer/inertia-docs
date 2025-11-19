@@ -102,7 +102,7 @@ const props = defineProps({ user: Object })
 const form = useRemember({
   first_name: null,
   last_name: null,
-}, `Users/Edit:\${props.user.id}`)
+}, `Users/Edit:${props.user.id}`)
 ```
 
 ```jsx React icon="react"
@@ -112,7 +112,7 @@ export default function Profile() {
   const [formState, setFormState] = useRemember({
     first_name: props.user.first_name,
     last_name: props.user.last_name,
-  }, `Users/Edit:\${this.user.id}`)
+  }, `Users/Edit:${this.user.id}`)
 }
 ```
 
@@ -122,7 +122,7 @@ import { page, useRemember } from '@inertiajs/svelte'
 const form = useRemember({
   first_name: $page.props.user.first_name,
   last_name: $page.props.user.last_name,
-}, `Users/Edit:\${$page.props.user.id}`)
+}, `Users/Edit:${$page.props.user.id}`)
 ```
 
 </CodeGroup>
@@ -137,21 +137,21 @@ If you're using the [Inertia form helper](/forms#form-helper), you can pass a un
 import { useForm } from '@inertiajs/vue3'
 
 const form = useForm('CreateUser', data)
-const form = useForm(`EditUser:\${props.user.id}\
+const form = useForm(`EditUser:${props.user.id}\
 ```
 
 ```js React icon="react"
 import { useForm } from '@inertiajs/react'
 
 const form = useForm('CreateUser', data)
-const form = useForm(`EditUser:\${user.id}\
+const form = useForm(`EditUser:${user.id}\
 ```
 
 ```js Svelte icon="s"
 import { useForm } from '@inertiajs/svelte'
 
 const form = useForm('CreateUser', data)
-const form = useForm(`EditUser:\${user.id}\
+const form = useForm(`EditUser:${user.id}\
 ```
 
 </CodeGroup>

@@ -2,9 +2,9 @@
 title: Forms
 ---
 
-import { VueSpecific } from "/snippets/vue-specific.jsx"
 import { ReactSpecific } from "/snippets/react-specific.jsx"
 import { SvelteSpecific } from "/snippets/svelte-specific.jsx"
+import { VueSpecific } from "/snippets/vue-specific.jsx"
 
 Inertia provides two primary ways to build forms: the `<Form>` component and the `useForm` helper. Both integrate with your server-side framework's validation and handle form submissions without full page reloads.
 
@@ -297,7 +297,7 @@ The `<Form>` component exposes reactive state and helper methods through its def
     reset,
     submit,
   }) => (
-    
+
       <input type="text" name="name" />
 
       {errors.name && <div>{errors.name}</div>}
@@ -307,7 +307,7 @@ The `<Form>` component exposes reactive state and helper methods through its def
       </button>
 
       {wasSuccessful && <div>User created successfully!</div>}
-    
+
   )}
 </Form>
 ```
@@ -398,10 +398,10 @@ The `errors` object uses dotted notation for nested fields, allowing you to disp
 ```jsx React icon="react"
 <Form action="/users" method="post">
   {({ errors }) => (
-    
+
       <input type="text" name="user.name" />
       {errors['user.name'] && <div>{errors['user.name']}</div>}
-    
+
   )}
 </Form>
 ```
@@ -522,7 +522,7 @@ To style the form while it's processing, you can target the inert form in the fo
 
 <CodeGroup>
 
-```jsx Tailwind 4 
+```jsx Tailwind 4
 <Form
     action="/profile"
     method="put"
@@ -533,7 +533,7 @@ To style the form while it's processing, you can target the inert form in the fo
 </Form>
 ```
 
-```css CSS 
+```css CSS
 form[inert] {
     opacity: 0.5;
     pointer-events: none;
@@ -821,24 +821,24 @@ If you need literal dots in your field names (not as nested object separators), 
 
 ```html Vue icon="vuejs"
 <Form action="/config" method="post">
-  <input type="text" name="app\\.name" />
-  <input type="text" name="settings.theme\\.mode" />
+  <input type="text" name="app\.name" />
+  <input type="text" name="settings.theme\.mode" />
   <button type="submit">Save</button>
 </Form>
 ```
 
 ```jsx React icon="react"
 <Form action="/config" method="post">
-  <input type="text" name="app\\.name" />
-  <input type="text" name="settings.theme\\.mode" />
+  <input type="text" name="app\.name" />
+  <input type="text" name="settings.theme\.mode" />
   <button type="submit">Save</button>
 </Form>
 ```
 
 ```html Svelte icon="s"
 <Form action="/config" method="post">
-  <input type="text" name="app\\.name" />
-  <input type="text" name="settings.theme\\.mode" />
+  <input type="text" name="app\.name" />
+  <input type="text" name="settings.theme\.mode" />
   <button type="submit">Save</button>
 </Form>
 ```
@@ -896,14 +896,14 @@ export default function CreateUser() {
   }
 
   return (
-    
+
       <Form ref={formRef} action="/users" method="post">
         <input type="text" name="name" />
         <button type="submit">Submit</button>
       </Form>
 
       <button onClick={handleSubmit}>Submit Programmatically</button>
-    
+
   )
 }
 ```
@@ -1477,21 +1477,21 @@ To instruct Inertia to store a form's data and errors in [history state](/v2/dat
 import { useForm } from '@inertiajs/vue3'
 
 const form = useForm('CreateUser', data)
-const form = useForm(`EditUser:\${user.id}\
+const form = useForm(`EditUser:${user.id}\
 ```
 
 ```js React icon="react"
 import { useForm } from '@inertiajs/react'
 
 const form = useForm('CreateUser', data)
-const form = useForm(`EditUser:\${user.id}\
+const form = useForm(`EditUser:${user.id}\
 ```
 
 ```js Svelte icon="s"
 import { useForm } from '@inertiajs/svelte'
 
 const form = useForm('CreateUser', data)
-const form = useForm(`EditUser:\${user.id}\
+const form = useForm(`EditUser:${user.id}\
 ```
 
 </CodeGroup>

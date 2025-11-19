@@ -6,9 +6,17 @@ The first step when installing Inertia is to configure your server-side framewor
 
 Inertia is fine-tuned for Laravel, so the documentation examples on this website utilize Laravel. For examples of using Inertia with other server-side frameworks, please refer to the framework specific documentation maintained by that adapter.
 
-## Laravel starter kits
+<Card
+    icon="laravel"
+    title="Laravel Starter Kits"
+    href="https://laravel.com/docs/starter-kits"
+    arrow="true"
+    cta="Start building"
+>
+Laravel's starter kits provide out-of-the-box scaffolding for new Inertia applications.
 
-Laravel's [starter kits](https://laravel.com/docs/starter-kits), Breeze and Jetstream, provide out-of-the-box scaffolding for new Inertia applications. These starter kits are the absolute fastest way to start building a new Inertia project using Laravel and Vue or React. However, if you would like to manually install Inertia into your application, please consult the documentation below.
+These starter kits are the absolute fastest way to start building a new Inertia project using Laravel and Vue or React. However, if you would like to manually install Inertia into your application, please consult the documentation below.
+</Card >
 
 ## Install dependencies
 
@@ -22,18 +30,17 @@ composer require inertiajs/inertia-laravel
 
 Next, setup the root template that will be loaded on the first page visit to your application. This template should include your site's CSS and JavaScript assets, along with the `@inertia` and `@inertiaHead` directives.
 
-```html
-
+```blade
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    @vite('resources/js/app.js')
-    @inertiaHead
-  </head>
-  <body>
-    @inertia
-  </body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        @vite('resources/js/app.js')
+        @inertiaHead
+    </head>
+    <body>
+        @inertia
+    </body>
 </html>
 ```
 
@@ -41,13 +48,12 @@ For React applications, it's recommended to include the `@viteReactRefresh` dire
 
 The `@inertia` directive renders a `<div>` element with an `id` of `app`. This element serves as the mounting point for your JavaScript application. You may customize the `id` by passing a different value to the directive.
 
-```html
-
+```blade
 <html>
-...
-<body>
-@inertia('custom-app-id')
-</body>
+    ...
+    <body>
+        @inertia('custom-app-id')
+    </body>
 </html>
 ```
 
@@ -66,11 +72,12 @@ php artisan inertia:middleware
 Once the middleware has been published, append the `HandleInertiaRequests` middleware to the `web` middleware group in your application's `bootstrap/app.php` file.
 
 ```php
-use App\\Http\\Middleware\\HandleInertiaRequests;
+use App\Http\Middleware\HandleInertiaRequests;
+
 ->withMiddleware(function (Middleware $middleware) {
-$middleware->web(append: [
-HandleInertiaRequests::class,
-]);
+    $middleware->web(append: [
+        HandleInertiaRequests::class,
+    ]);
 })
 ```
 
@@ -81,7 +88,7 @@ This middleware provides a `version()` method for setting your [asset version](/
 That's it, you're all ready to go server-side! Now you're ready to start creating Inertia [pages](/v2/the-basics/pages) and rendering them via [responses](/v2/the-basics/responses).
 
 ```php
-use Inertia\\Inertia;
+use Inertia\Inertia;
 
 class EventsController extends Controller
 {
@@ -92,7 +99,7 @@ class EventsController extends Controller
                 'id',
                 'title',
                 'start_date',
-                'description'
+                'description',
             ),
         ]);
     }

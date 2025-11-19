@@ -210,7 +210,7 @@ defineProps({ title: String })
 </script>
 
 <template>
-  <Head :title="title ? `\${title} - My App` : 'My App'">
+  <Head :title="title ? `${title} - My App` : 'My App'">
     <slot />
   </Head>
 </template>
@@ -224,7 +224,7 @@ import { Head } from '@inertiajs/react'
 const Site = ({ title, children }) => {
   return (
     <Head>
-      <title>{title ? `\${title} - My App` : 'My App'}</title>
+      <title>{title ? `${title} - My App` : 'My App'}</title>
       {children}
     </Head>
   )

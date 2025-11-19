@@ -64,7 +64,7 @@ createServer(page =>
     render: renderToString,
     resolve: name => {
       const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-      return pages[`./Pages/\${name}.vue`]
+      return pages[`./Pages/${name}.vue`]
     },
     setup({ App, props, plugin }) {
       return createSSRApp({
@@ -86,7 +86,7 @@ createServer(page =>
     render: ReactDOMServer.renderToString,
     resolve: name => {
       const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
-      return pages[`./Pages/\${name}.jsx`]
+      return pages[`./Pages/${name}.jsx`]
     },
     setup: ({ App, props }) => <App {...props} />,
   }),
@@ -102,7 +102,7 @@ createServer(page =>
     page,
     resolve: name => {
       const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
-      return pages[`./Pages/\${name}.svelte`]
+      return pages[`./Pages/${name}.svelte`]
     },
     setup({ App, props }) {
       return App.render(props)
@@ -121,7 +121,7 @@ createServer(page =>
     page,
     resolve: name => {
       const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
-      return pages[`./Pages/\${name}.svelte`]
+      return pages[`./Pages/${name}.svelte`]
     },
     setup({ App, props }) {
       return render(App, { props })
@@ -263,7 +263,7 @@ Since your website is now being server-side rendered, you can instruct <VueSpeci
   createInertiaApp({
     resolve: name => {
       const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-      return pages[`./Pages/\${name}.vue`]
+      return pages[`./Pages/${name}.vue`]
     },
     setup({ el, App, props, plugin }) {
 \-     createApp({ render: () => h(App, props) })
@@ -282,7 +282,7 @@ Since your website is now being server-side rendered, you can instruct <VueSpeci
   createInertiaApp({
     resolve: name => {
       const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
-      return pages[`./Pages/\${name}.jsx`]
+      return pages[`./Pages/${name}.jsx`]
     },
     setup({ el, App, props }) {
 \-     createRoot(el).render(<App {...props} />)
@@ -297,7 +297,7 @@ Since your website is now being server-side rendered, you can instruct <VueSpeci
    createInertiaApp({
      resolve: name => {
        const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
-       return pages[`./Pages/\${name}.svelte`]
+       return pages[`./Pages/${name}.svelte`]
      },
     setup({ el, App, props }) {
 \-     new App({ target: el, props })
@@ -314,7 +314,7 @@ Since your website is now being server-side rendered, you can instruct <VueSpeci
    createInertiaApp({
      resolve: name => {
        const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
-       return pages[`./Pages/\${name}.svelte`]
+       return pages[`./Pages/${name}.svelte`]
      },
      setup({ el, App, props }) {
 \-      mount(App, { target: el, props })

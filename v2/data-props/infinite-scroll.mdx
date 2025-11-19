@@ -167,7 +167,7 @@ export default function Users({ users }) {
   }
 
   return (
-    
+
       <button onClick={() => show('admin')}>Show admins</button>
       <button onClick={() => show('customer')}>Show customers</button>
 
@@ -178,7 +178,7 @@ export default function Users({ users }) {
           </div>
         ))}
       </InfiniteScroll>
-    
+
   )
 }
 ```
@@ -905,7 +905,7 @@ export default ({ users }) => {
   }
 
   return (
-    
+
       <button onClick={fetchNext}>Load More</button>
 
       <InfiniteScroll ref={infiniteScrollRef} data="users" manual>
@@ -913,7 +913,7 @@ export default ({ users }) => {
           <div key={user.id}>{user.name}</div>
         ))}
       </InfiniteScroll>
-    
+
   )
 }
 ```
@@ -973,7 +973,7 @@ Inertia::scroll($data, metadata: $metadataProvider);
 The metadata parameter accepts an instance of `ProvidesScrollMetadata` or a callback that returns such an instance. The callback receives the `$data` parameter. This is useful when integrating with third-party pagination libraries like Fractal.
 
 ```php
-use League\\Fractal\\Resource\\Collection;
+use League\Fractal\Resource\Collection;
 class FractalScrollMetadata implements ProvidesScrollMetadata
 {
 public function __construct(protected Collection $resource) {}

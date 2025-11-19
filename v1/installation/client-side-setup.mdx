@@ -16,11 +16,11 @@ First, install the Inertia client-side adapter corresponding to your framework o
 
 <CodeGroup>
 
-```bash Vue 2 
+```bash Vue 2
 npm install @inertiajs/vue2
 ```
 
-```bash Vue 3 
+```bash Vue 3
 npm install @inertiajs/vue3
 ```
 
@@ -40,14 +40,14 @@ Next, update your main JavaScript file to boot your Inertia app. To accomplish t
 
 <CodeGroup>
 
-```js Vue 2 
+```js Vue 2
 import Vue from 'vue'
 import { createInertiaApp } from '@inertiajs/vue2'
 
 createInertiaApp({
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-    return pages[`./Pages/\${name}.vue`]
+    return pages[`./Pages/${name}.vue`]
   },
   setup({ el, App, props, plugin }) {
     Vue.use(plugin)
@@ -59,14 +59,14 @@ createInertiaApp({
 })
 ```
 
-```js Vue 3 
+```js Vue 3
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 
 createInertiaApp({
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-    return pages[`./Pages/\${name}.vue`]
+    return pages[`./Pages/${name}.vue`]
   },
   setup({ el, App, props, plugin }) {
     createApp({ render: () => h(App, props) })
@@ -83,7 +83,7 @@ import { createRoot } from 'react-dom/client'
 createInertiaApp({
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
-    return pages[`./Pages/\${name}.jsx`]
+    return pages[`./Pages/${name}.jsx`]
   },
   setup({ el, App, props }) {
     createRoot(el).render(<App {...props} />)
@@ -97,7 +97,7 @@ import { createInertiaApp } from '@inertiajs/svelte'
 createInertiaApp({
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
-    return pages[`./Pages/\${name}.svelte`]
+    return pages[`./Pages/${name}.svelte`]
   },
   setup({ el, App, props }) {
     new App({ target: el, props })
@@ -115,48 +115,48 @@ The `resolve` callback tells Inertia how to load a page component. It receives a
 
 <CodeGroup>
 
-```js Vue 2 
+```js Vue 2
 // Vite
 resolve: name => {
   const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-  return pages[`./Pages/\${name}.vue`]
+  return pages[`./Pages/${name}.vue`]
 },
 
 // Webpack
-resolve: name => require(`./Pages/\${name}`),
+resolve: name => require(`./Pages/${name}`),
 ```
 
-```js Vue 3 
+```js Vue 3
 // Vite
 resolve: name => {
   const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-  return pages[`./Pages/\${name}.vue`]
+  return pages[`./Pages/${name}.vue`]
 },
 
 // Webpack
-resolve: name => require(`./Pages/\${name}`),
+resolve: name => require(`./Pages/${name}`),
 ```
 
 ```js React icon="react"
 // Vite
 resolve: name => {
   const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
-  return pages[`./Pages/\${name}.jsx`]
+  return pages[`./Pages/${name}.jsx`]
 },
 
 // Webpack
-resolve: name => require(`./Pages/\${name}`),
+resolve: name => require(`./Pages/${name}`),
 ```
 
 ```js Svelte icon="s"
 // Vite
 resolve: name => {
   const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
-  return pages[`./Pages/\${name}.svelte`]
+  return pages[`./Pages/${name}.svelte`]
 },
 
 // Webpack
-resolve: name => require(`./Pages/\${name}.svelte`),
+resolve: name => require(`./Pages/${name}.svelte`),
 ```
 
 </CodeGroup>

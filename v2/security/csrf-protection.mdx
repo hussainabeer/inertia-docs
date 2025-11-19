@@ -67,7 +67,7 @@ When a CSRF token mismatch occurs, your server-side framework will likely throw 
 When using Laravel, you may modify your application's exception handler to automatically redirect the user back to the page they were previously on while flashing a message to the session. To accomplish this, you may use the `respond` exception method in your application's `bootstrap/app.php` file.
 
 ```php
-use Symfony\\Component\\HttpFoundation\\Response;
+use Symfony\Component\HttpFoundation\Response;
 
 ->withExceptions(function (Exceptions $exceptions) {
     $exceptions->respond(function (Response $response) {

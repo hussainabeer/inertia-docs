@@ -18,7 +18,7 @@ Inertia pages are simply JavaScript components. If you have ever written a Vue, 
 
 <CodeGroup>
 
-```html Vue 2 
+```html Vue 2
 <template>
   <Layout>
     <Head title="Welcome" />
@@ -43,7 +43,7 @@ export default {
 </script>
 ```
 
-```html Vue 3 
+```html Vue 3
 <script setup>
 import Layout from './Layout'
 import { Head } from '@inertiajs/vue3'
@@ -96,7 +96,7 @@ export default function Welcome({ user }) {
 Given the page above, you can render the page by returning an [Inertia response](/v1/the-basics/responses) from a controller or route. In this example, let's assume this page is stored at <VueSpecific>`resources/js/Pages/User/Show.vue`</VueSpecific><ReactSpecific>`resources/js/Pages/User/Show.jsx`</ReactSpecific><SvelteSpecific>`resources/js/Pages/User/Show.svelte`</SvelteSpecific>within a Laravel application.
 
 ```php
-use Inertia\\Inertia;
+use Inertia\Inertia;
 
 class UserController extends Controller
 {
@@ -115,7 +115,7 @@ While not required, for most projects it makes sense to create a site layout tha
 
 <CodeGroup>
 
-```html Vue 2 
+```html Vue 2
 <template>
   <main>
     <header>
@@ -140,7 +140,7 @@ export default {
 </script>
 ```
 
-```html Vue 3 
+```html Vue 3
 <script setup>
 import { Link } from '@inertiajs/vue3'
 </script>
@@ -205,7 +205,7 @@ For example, maybe you have an audio player on a podcast website that you want t
 
 <CodeGroup>
 
-```html Vue 2 
+```html Vue 2
 <template>
   <div>
     <H1>Welcome</H1>
@@ -230,7 +230,7 @@ export default {
 </script>
 ```
 
-```html Vue 3 
+```html Vue 3
 <script>
 import Layout from './Layout'
 
@@ -258,10 +258,10 @@ import Layout from './Layout'
 
 const Home = ({ user }) => {
   return (
-    
+
       <H1>Welcome</H1>
       <p>Hello {user.name}, welcome to your first Inertia app!</p>
-    
+
   )
 }
 
@@ -289,7 +289,7 @@ You can also create more complex layout arrangements using nested layouts.
 
 <CodeGroup>
 
-```html Vue 2 
+```html Vue 2
 <template>
   <div>
     <H1>Welcome</H1>
@@ -319,7 +319,7 @@ export default {
 </script>
 ```
 
-```html Vue 3 
+```html Vue 3
 <script>
 import SiteLayout from './SiteLayout'
 import NestedLayout from './NestedLayout'
@@ -351,10 +351,10 @@ import NestedLayout from './NestedLayout'
 
 const Home = ({ user }) => {
   return (
-    
+
       <H1>Welcome</H1>
       <p>Hello {user.name}, welcome to your first Inertia app!</p>
-    
+
   )
 }
 
@@ -397,13 +397,13 @@ If you're using persistent layouts, you may find it convenient to define the def
 
 <CodeGroup>
 
-```js Vue 2 
+```js Vue 2
 import Layout from './Layout'
 
 createInertiaApp({
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-    let page = pages[`./Pages/\${name}.vue`]
+    let page = pages[`./Pages/${name}.vue`]
     page.default.layout = page.default.layout || Layout
     return page
   },
@@ -411,13 +411,13 @@ createInertiaApp({
 })
 ```
 
-```js Vue 3 
+```js Vue 3
 import Layout from './Layout'
 
 createInertiaApp({
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-    let page = pages[`./Pages/\${name}.vue`]
+    let page = pages[`./Pages/${name}.vue`]
     page.default.layout = page.default.layout || Layout
     return page
   },
@@ -431,7 +431,7 @@ import Layout from './Layout'
 createInertiaApp({
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
-    let page = pages[`./Pages/\${name}.jsx`]
+    let page = pages[`./Pages/${name}.jsx`]
     page.default.layout = page.default.layout || (page => <Layout children={page} />)
     return page
   },
@@ -445,7 +445,7 @@ import Layout from './Layout'
 createInertiaApp({
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
-    let page = pages[`./Pages/\${name}.svelte`]
+    let page = pages[`./Pages/${name}.svelte`]
     return { default: page.default, layout: page.layout || Layout }
   },
   // ...
@@ -460,13 +460,13 @@ You can even go a step further and conditionally set the default page layout bas
 
 <CodeGroup>
 
-```js Vue 2 
+```js Vue 2
 import Layout from './Layout'
 
 createInertiaApp({
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-    let page = pages[`./Pages/\${name}.vue`]
+    let page = pages[`./Pages/${name}.vue`]
     page.default.layout = name.startsWith('Public/') ? undefined : Layout
     return page
   },
@@ -474,13 +474,13 @@ createInertiaApp({
 })
 ```
 
-```js Vue 3 
+```js Vue 3
 import Layout from './Layout'
 
 createInertiaApp({
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-    let page = pages[`./Pages/\${name}.vue`]
+    let page = pages[`./Pages/${name}.vue`]
     page.default.layout = name.startsWith('Public/') ? undefined : Layout
     return page
   },
@@ -494,7 +494,7 @@ import Layout from './Layout'
 createInertiaApp({
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
-    let page = pages[`./Pages/\${name}.jsx`]
+    let page = pages[`./Pages/${name}.jsx`]
     page.default.layout = name.startsWith('Public/') ? undefined : page => <Layout children={page} />
     return page
   },
@@ -508,7 +508,7 @@ import Layout from './Layout'
 createInertiaApp({
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
-    let page = pages[`./Pages/\${name}.svelte`]
+    let page = pages[`./Pages/${name}.svelte`]
     return { default: page.default, layout: name.startsWith('Public/') ? undefined : Layout }
     return page
   },

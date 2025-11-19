@@ -27,11 +27,11 @@ If you are not using a Laravel starter kit and would like to manually configure 
 
 <CodeGroup>
 
-```bash Vue 2 
+```bash Vue 2
 npm install vue-server-renderer
 ```
 
-```bash Vue 3 
+```bash Vue 3
 npm install @vue/server-renderer
 ```
 
@@ -63,7 +63,7 @@ This file is going to look very similar to your `resources/js/app.js` file, exce
 
 <CodeGroup>
 
-```js Vue 2 
+```js Vue 2
 import { createInertiaApp } from '@inertiajs/vue2'
 import createServer from '@inertiajs/vue2/server'
 import Vue from 'vue'
@@ -75,7 +75,7 @@ createServer(page =>
     render: createRenderer().renderToString,
     resolve: name => {
       const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-      return pages[`./Pages/\${name}.vue`]
+      return pages[`./Pages/${name}.vue`]
     },
     setup({ App, props, plugin }) {
       Vue.use(plugin)
@@ -87,7 +87,7 @@ createServer(page =>
 )
 ```
 
-```js Vue 3 
+```js Vue 3
 import { createInertiaApp } from '@inertiajs/vue3'
 import createServer from '@inertiajs/vue3/server'
 import { renderToString } from '@vue/server-renderer'
@@ -99,7 +99,7 @@ createServer(page =>
     render: renderToString,
     resolve: name => {
       const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-      return pages[`./Pages/\${name}.vue`]
+      return pages[`./Pages/${name}.vue`]
     },
     setup({ App, props, plugin }) {
       return createSSRApp({
@@ -121,7 +121,7 @@ createServer(page =>
     render: ReactDOMServer.renderToString,
     resolve: name => {
       const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
-      return pages[`./Pages/\${name}.jsx`]
+      return pages[`./Pages/${name}.jsx`]
     },
     setup: ({ App, props }) => <App {...props} />,
   }),
@@ -137,7 +137,7 @@ createServer(page =>
     page,
     resolve: name => {
       const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
-      return pages[`./Pages/\${name}.svelte`]
+      return pages[`./Pages/${name}.svelte`]
     },
   }),
 )
@@ -204,11 +204,11 @@ Since your website is now being server-side rendered, you can instruct <VueSpeci
 
 <CodeGroup>
 
-```js Vue 2 
+```js Vue 2
 // No changes required
 ```
 
-```diff Vue 3 
+```diff Vue 3
 \- import { createApp, h } from 'vue'
 \+ import { createSSRApp, h } from 'vue'
   import { createInertiaApp } from '@inertiajs/vue3'
@@ -216,7 +216,7 @@ Since your website is now being server-side rendered, you can instruct <VueSpeci
   createInertiaApp({
     resolve: name => {
       const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-      return pages[`./Pages/\${name}.vue`]
+      return pages[`./Pages/${name}.vue`]
     },
     setup({ el, App, props, plugin }) {
 \-     createApp({ render: () => h(App, props) })
@@ -235,7 +235,7 @@ Since your website is now being server-side rendered, you can instruct <VueSpeci
   createInertiaApp({
     resolve: name => {
       const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
-      return pages[`./Pages/\${name}.jsx`]
+      return pages[`./Pages/${name}.jsx`]
     },
     setup({ el, App, props }) {
 \-     createRoot(el).render(<App {...props} />)

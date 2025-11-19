@@ -54,7 +54,7 @@ php artisan inertia:middleware
 Once the middleware has been published, append the `HandleInertiaRequests` middleware to the `web` middleware group in your application's `bootstrap/app.php` file.
 
 ```php
-use App\\Http\\Middleware\\HandleInertiaRequests;
+use App\Http\Middleware\HandleInertiaRequests;
 ->withMiddleware(function (Middleware $middleware) {
 $middleware->web(append: [
 HandleInertiaRequests::class,
@@ -69,7 +69,7 @@ This middleware provides a `version()` method for setting your [asset version](/
 That's it, you're all ready to go server-side! Now you're ready to start creating Inertia [pages](/v1/the-basics/pages) and rendering them via [responses](/v1/the-basics/responses).
 
 ```php
-use Inertia\\Inertia;
+use Inertia\Inertia;
 
 class EventsController extends Controller
 {

@@ -648,7 +648,7 @@ import { router } from '@inertiajs/vue3'
 router.prependToProp('notifications', (current, props) => {
   return {
     id: Date.now(),
-    message: `Hello \${props.user.name}\
+    message: `Hello ${props.user.name}\
 ```
 
 ```js React icon="react"
@@ -657,7 +657,7 @@ import { router } from '@inertiajs/react'
 router.prependToProp('notifications', (current, props) => {
   return {
     id: Date.now(),
-    message: `Hello \${props.user.name}\
+    message: `Hello ${props.user.name}\
 ```
 
 ```js Svelte icon="s"
@@ -666,7 +666,7 @@ import { router } from '@inertiajs/svelte'
 router.prependToProp('notifications', (current, props) => {
   return {
     id: Date.now(),
-    message: `Hello \${props.user.name}\
+    message: `Hello ${props.user.name}\
 ```
 
 </CodeGroup>
@@ -1001,19 +1001,19 @@ Returning `false` from the `onBefore()` callback will cause the visit to be canc
 ```js Vue icon="vuejs"
 import { router } from '@inertiajs/vue3'
 
-router.delete(`/users/\${user.id}\
+router.delete(`/users/${user.id}\
 ```
 
 ```js React icon="react"
 import { router } from '@inertiajs/react'
 
-router.delete(`/users/\${user.id}\
+router.delete(`/users/${user.id}\
 ```
 
 ```js Svelte icon="s"
 import { router } from '@inertiajs/svelte'
 
-router.delete(`/users/\${user.id}\
+router.delete(`/users/${user.id}\
 ```
 
 </CodeGroup>

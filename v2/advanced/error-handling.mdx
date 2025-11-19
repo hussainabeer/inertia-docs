@@ -34,9 +34,9 @@ In production you will want to return a proper Inertia error response instead of
 When building Laravel applications, you can accomplish this by using the `respond` exception method in your application's `bootstrap/app.php` file.
 
 ```php
-use Illuminate\\Http\\Request;
-use Symfony\\Component\\HttpFoundation\\Response;
-use Inertia\\Inertia;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Inertia\Inertia;
 
 ->withExceptions(function (Exceptions $exceptions) {
     $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {

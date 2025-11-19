@@ -16,7 +16,7 @@ To save local component state to the history state, use the `remember` feature t
 
 <CodeGroup>
 
-```js Vue 2 
+```js Vue 2
 {
   // Option 1: Object...
   remember: {
@@ -41,7 +41,7 @@ To save local component state to the history state, use the `remember` feature t
 }
 ```
 
-```js Vue 3 
+```js Vue 3
 import { useRemember } from '@inertiajs/vue3'
 
 const form = useRemember({
@@ -85,7 +85,7 @@ If your page contains multiple components that use the remember functionality pr
 
 <CodeGroup>
 
-```js Vue 2 
+```js Vue 2
 {
   remember: {
     data: ['form'],
@@ -102,7 +102,7 @@ If your page contains multiple components that use the remember functionality pr
 }
 ```
 
-```js Vue 3 
+```js Vue 3
 import { useRemember } from '@inertiajs/vue3'
 
 const form = useRemember({
@@ -138,12 +138,12 @@ If you have multiple instances of the same component on the page using the remem
 
 <CodeGroup>
 
-```js Vue 2 
+```js Vue 2
 {
   remember: {
     data: ['form'],
     key() {
-      return `Users/Edit:\${this.user.id}`
+      return `Users/Edit:${this.user.id}`
     }
   },
   data() {
@@ -157,7 +157,7 @@ If you have multiple instances of the same component on the page using the remem
 }
 ```
 
-```js Vue 3 
+```js Vue 3
 import { useRemember } from '@inertiajs/vue3'
 
 const props = defineProps({ user: Object })
@@ -165,7 +165,7 @@ const props = defineProps({ user: Object })
 const form = useRemember({
   first_name: null,
   last_name: null,
-}, `Users/Edit:\${props.user.id}`)
+}, `Users/Edit:${props.user.id}`)
 ```
 
 ```jsx React icon="react"
@@ -175,7 +175,7 @@ export default function Profile() {
   const [formState, setFormState] = useRemember({
     first_name: props.user.first_name,
     last_name: props.user.last_name,
-  }, `Users/Edit:\${this.user.id}`)
+  }, `Users/Edit:${this.user.id}`)
 }
 ```
 
@@ -185,7 +185,7 @@ import { page, remember } from '@inertiajs/svelte'
 let form = remember({
   first_name: $page.props.user.first_name,
   last_name: $page.props.user.last_name,
-}, `Users/Edit:\${$page.props.user.id}`)
+}, `Users/Edit:${$page.props.user.id}`)
 ```
 
 </CodeGroup>
@@ -196,32 +196,32 @@ If you're using the [Inertia form helper](/forms#form-helper), you can pass a un
 
 <CodeGroup>
 
-```js Vue 2 
+```js Vue 2
 import { useForm } from '@inertiajs/vue2'
 
 form: useForm('CreateUser', data)
-form: useForm(`EditUser:\${this.user.id}\
+form: useForm(`EditUser:${this.user.id}\
 ```
 
-```js Vue 3 
+```js Vue 3
 import { useForm } from '@inertiajs/vue3'
 
 const form = useForm('CreateUser', data)
-const form = useForm(`EditUser:\${props.user.id}\
+const form = useForm(`EditUser:${props.user.id}\
 ```
 
 ```js React icon="react"
 import { useForm } from '@inertiajs/react'
 
 const form = useForm('CreateUser', data)
-const form = useForm(`EditUser:\${user.id}\
+const form = useForm(`EditUser:${user.id}\
 ```
 
 ```js Svelte icon="s"
 import { useForm } from '@inertiajs/svelte'
 
 const form = useForm('CreateUser', data)
-const form = useForm(`EditUser:\${user.id}\
+const form = useForm(`EditUser:${user.id}\
 ```
 
 </CodeGroup>
@@ -234,7 +234,7 @@ However, it's also possible to manage this manually using the underlying `rememb
 
 <CodeGroup>
 
-```js Vue 2 
+```js Vue 2
 import { router } from '@inertiajs/vue2'
 
 // Save local component state to history state...
@@ -244,7 +244,7 @@ router.remember(data, 'my-key')
 let data = router.restore('my-key')
 ```
 
-```js Vue 3 
+```js Vue 3
 import { router } from '@inertiajs/vue3'
 
 // Save local component state to history state...
