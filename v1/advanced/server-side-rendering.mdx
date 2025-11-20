@@ -2,6 +2,7 @@
 title: Server-Side Rendering (SSR)
 ---
 
+import { ClientSpecific } from "/snippets/client-specific.jsx"
 import { VueSpecific } from "/snippets/vue-specific.jsx"
 import { ReactSpecific } from "/snippets/react-specific.jsx"
 import { SvelteSpecific } from "/snippets/svelte-specific.jsx"
@@ -156,7 +157,7 @@ export default defineConfig({
 plugins: [
 laravel({
 input: ['resources/css/app.css', 'resources/js/app.js'],
-\+     ssr: 'resources/js/ssr.js',
++     ssr: 'resources/js/ssr.js',
 refresh: true,
 }),
 // ...
@@ -171,8 +172,8 @@ Next, let's update the `build` script in our `package.json` file to also build o
 ```diff
 "scripts": {
 "dev": "vite",
-\-   "build": "vite build"
-\+   "build": "vite build && vite build --ssr"
+-   "build": "vite build"
++   "build": "vite build && vite build --ssr"
 },
 ```
 
@@ -209,8 +210,8 @@ Since your website is now being server-side rendered, you can instruct <VueSpeci
 ```
 
 ```diff Vue 3
-\- import { createApp, h } from 'vue'
-\+ import { createSSRApp, h } from 'vue'
+- import { createApp, h } from 'vue'
++ import { createSSRApp, h } from 'vue'
     import { createInertiaApp } from '@inertiajs/vue3'
 
     createInertiaApp({
@@ -219,8 +220,8 @@ Since your website is now being server-side rendered, you can instruct <VueSpeci
             return pages[`./Pages/${name}.vue`]
         },
         setup({ el, App, props, plugin }) {
-\-     createApp({ render: () => h(App, props) })
-\+     createSSRApp({ render: () => h(App, props) })
+-     createApp({ render: () => h(App, props) })
++     createSSRApp({ render: () => h(App, props) })
                 .use(plugin)
                 .mount(el)
         },
@@ -229,8 +230,8 @@ Since your website is now being server-side rendered, you can instruct <VueSpeci
 
 ```diff React icon="react"
     import { createInertiaApp } from '@inertiajs/react'
-\- import { createRoot } from 'react-dom/client'
-\+ import { hydrateRoot } from 'react-dom/client'
+- import { createRoot } from 'react-dom/client'
++ import { hydrateRoot } from 'react-dom/client'
 
     createInertiaApp({
         resolve: name => {
@@ -238,8 +239,8 @@ Since your website is now being server-side rendered, you can instruct <VueSpeci
             return pages[`./Pages/${name}.jsx`]
         },
         setup({ el, App, props }) {
-\-     createRoot(el).render(<App {...props} />)
-\+     hydrateRoot(el, <App {...props} />)
+-     createRoot(el).render(<App {...props} />)
++     hydrateRoot(el, <App {...props} />)
         },
     })
 ```
@@ -256,12 +257,12 @@ Since your website is now being server-side rendered, you can instruct <VueSpeci
                 ssr: 'resources/js/ssr.js',
                 refresh: true,
             }),
-\-     svelte(),
-\+     svelte({
-\+       compilerOptions: {
-\+         hydratable: true,
-\+       },
-\+     }),
+-     svelte(),
++     svelte({
++       compilerOptions: {
++         hydratable: true,
++       },
++     }),
         ],
     })
 ```
@@ -278,12 +279,12 @@ Since your website is now being server-side rendered, you can instruct <VueSpeci
        const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
        return pages[`./Pages/${name}.svelte`]
      },
-\-   setup({ el, App, props }) {
-\-     new App({ target: el, props })
-\-   },
-\+   setup({ el, App }) {
-\+     new App({ target: el, hydrate: true })
-\+   },
+-   setup({ el, App, props }) {
+-     new App({ target: el, props })
+-   },
++   setup({ el, App }) {
++     new App({ target: el, hydrate: true })
++   },
    })
 ```</SvelteSpecific>## Deployment
 

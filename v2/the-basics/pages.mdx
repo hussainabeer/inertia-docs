@@ -2,6 +2,7 @@
 title: Pages
 ---
 
+import { ClientSpecific } from "/snippets/client-specific.jsx"
 import { ReactSpecific } from "/snippets/react-specific.jsx"
 import { SvelteSpecific } from "/snippets/svelte-specific.jsx"
 import { VueSpecific } from "/snippets/vue-specific.jsx"
@@ -84,7 +85,9 @@ export default function Welcome({ user }) {
 
 </CodeGroup>
 
+<ClientSpecific>
 Given the page above, you can render the page by returning an [Inertia response](/v2/the-basics/responses) from a controller or route. In this example, let's assume this page is stored at <VueSpecific>`resources/js/Pages/User/Show.vue`</VueSpecific><ReactSpecific>`resources/js/Pages/User/Show.jsx`</ReactSpecific><SvelteSpecific>`resources/js/Pages/User/Show.svelte`</SvelteSpecific>within a Laravel application.
+</ClientSpecific>
 
 ```php
 use Inertia\Inertia;
@@ -182,7 +185,9 @@ export default function Layout({ children }) {
 
 </CodeGroup>
 
+<ClientSpecific>
 As you can see, there is nothing Inertia specific within this template. This is just a typical <VueSpecific>Vue</VueSpecific><ReactSpecific>React</ReactSpecific><SvelteSpecific>Svelte</SvelteSpecific> component.
+</ClientSpecific>
 
 ## Persistent Layouts
 

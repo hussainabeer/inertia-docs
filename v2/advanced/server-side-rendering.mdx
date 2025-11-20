@@ -2,11 +2,12 @@
 title: Server-Side Rendering (SSR)
 ---
 
-import { VueSpecific } from "/snippets/vue-specific.jsx"
+import { ClientSpecific } from "/snippets/client-specific.jsx"
 import { ReactSpecific } from "/snippets/react-specific.jsx"
-import { Svelte5Specific } from "/snippets/svelte5-specific.jsx"
-import { Svelte4Specific } from "/snippets/svelte4-specific.jsx"
 import { SvelteSpecific } from "/snippets/svelte-specific.jsx"
+import { Svelte4Specific } from "/snippets/svelte4-specific.jsx"
+import { Svelte5Specific } from "/snippets/svelte5-specific.jsx"
+import { VueSpecific } from "/snippets/vue-specific.jsx"
 
 Server-side rendering pre-renders your JavaScript pages on the server, allowing your visitors to receive fully rendered HTML when they visit your application. Since fully rendered HTML is served by your application, it's also easier for search engines to index your site.
 
@@ -200,16 +201,16 @@ createServer(page =>
 
 Next, we need to update our Vite configuration to build our new `ssr.js` file. We can do this by adding a `ssr` property to Laravel's Vite plugin configuration in our `vite.config.js`file.
 
-```diff
+```diff vite.config.js
 export default defineConfig({
-plugins: [
-laravel({
-input: ['resources/css/app.css', 'resources/js/app.js'],
-\+     ssr: 'resources/js/ssr.js',
-refresh: true,
-}),
-// ...
-],
+    plugins: [
+        laravel({
+            input: ['resources/css/app.css', 'resources/js/app.js'],
++           ssr: 'resources/js/ssr.js',
+            refresh: true,
+        }),
+        // ...
+    ],
 })
 ```
 
@@ -217,11 +218,11 @@ refresh: true,
 
 Next, let's update the `build` script in our `package.json` file to also build our new `ssr.js` file.
 
-```diff
+```diff package.json
 "scripts": {
-"dev": "vite",
-\-   "build": "vite build"
-\+   "build": "vite build && vite build --ssr"
+    "dev": "vite",
+-   "build": "vite build"
++   "build": "vite build && vite build --ssr"
 },
 ```
 
@@ -247,89 +248,99 @@ php artisan inertia:start-ssr --runtime=bun
 
 With the server running, you should be able to access your app within the browser with server-side rendering enabled. In fact, you should be able to disable JavaScript entirely and still navigate around your application.
 
-## Client Side Hydration
+## Client-Side Hydration
 
+<ClientSpecific>
 Since your website is now being server-side rendered, you can instruct <VueSpecific>Vue</VueSpecific><ReactSpecific>React</ReactSpecific><SvelteSpecific>Svelte</SvelteSpecific> to "hydrate" the static markup and make it interactive instead of re-rendering all the HTML that we just generated.
+</ClientSpecific>
 
-<VueSpecific>To enable client-side hydration in a Vue app, update your `ssr.js` file to use `createSSRApp` instead of `createApp`.</VueSpecific><ReactSpecific>To enable client-side hydration in a React app, update your `ssr.js` file to use `hydrateRoot` instead of `createRoot`.</ReactSpecific><Svelte4Specific>To enable client-side hydration in a Svelte 4 app, set the `hydrate` option to `true` in your `ssr.js` file.</Svelte4Specific><Svelte5Specific>To enable client-side hydration in a Svelte 5 app, update your `ssr.js` file to use `hydrate` instead of `mount` when server rendering.</Svelte5Specific>
+<VueSpecific>To enable client-side hydration in a Vue app, update your `ssr.js` file to use `createSSRApp` instead of `createApp`.</VueSpecific>
+
+<ReactSpecific>To enable client-side hydration in a React app, update your `ssr.js` file to use `hydrateRoot` instead of `createRoot`.</ReactSpecific>
+
+<Svelte4Specific>To enable client-side hydration in a Svelte 4 app, set the `hydrate` option to `true` in your `ssr.js` file.</Svelte4Specific>
+
+<Svelte5Specific>To enable client-side hydration in a Svelte 5 app, update your `ssr.js` file to use `hydrate` instead of `mount` when server rendering.</Svelte5Specific>
 
 <CodeGroup>
 
 ```diff Vue icon="vuejs"
-\- import { createApp, h } from 'vue'
-\+ import { createSSRApp, h } from 'vue'
-    import { createInertiaApp } from '@inertiajs/vue3'
+- import { createApp, h } from 'vue'
++ import { createSSRApp, h } from 'vue'
+import { createInertiaApp } from '@inertiajs/vue3'
 
-    createInertiaApp({
-        resolve: name => {
-            const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-            return pages[`./Pages/${name}.vue`]
-        },
-        setup({ el, App, props, plugin }) {
-\-     createApp({ render: () => h(App, props) })
-\+     createSSRApp({ render: () => h(App, props) })
-                .use(plugin)
-                .mount(el)
-        },
-    })
+createInertiaApp({
+    resolve: name => {
+        const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+        return pages[`./Pages/${name}.vue`]
+    },
+    setup({ el, App, props, plugin }) {
+-   createApp({ render: () => h(App, props) })
++   createSSRApp({ render: () => h(App, props) })
+        .use(plugin)
+        .mount(el)
+    },
+})
 ```
 
 ```diff React icon="react"
-    import { createInertiaApp } from '@inertiajs/react'
-\- import { createRoot } from 'react-dom/client'
-\+ import { hydrateRoot } from 'react-dom/client'
+import { createInertiaApp } from '@inertiajs/react'
+- import { createRoot } from 'react-dom/client'
++ import { hydrateRoot } from 'react-dom/client'
 
-    createInertiaApp({
-        resolve: name => {
-            const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
-            return pages[`./Pages/${name}.jsx`]
-        },
-        setup({ el, App, props }) {
-\-     createRoot(el).render(<App {...props} />)
-\+     hydrateRoot(el, <App {...props} />)
-        },
-    })
+createInertiaApp({
+    resolve: name => {
+        const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
+        return pages[`./Pages/${name}.jsx`]
+    },
+    setup({ el, App, props }) {
+-       createRoot(el).render(<App {...props} />)
++       hydrateRoot(el, <App {...props} />)
+    },
+})
 ```
 
 ```diff Svelte 4 icon="s"
-   import { createInertiaApp } from '@inertiajs/svelte'
+import { createInertiaApp } from '@inertiajs/svelte'
 
-   createInertiaApp({
-     resolve: name => {
-       const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
-       return pages[`./Pages/${name}.svelte`]
-     },
-    setup({ el, App, props }) {
-\-     new App({ target: el, props })
-\+     new App({ target: el, props, hydrate: true })
+createInertiaApp({
+    resolve: name => {
+        const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
+        return pages[`./Pages/${name}.svelte`]
     },
-   })
+    setup({ el, App, props }) {
+-       new App({ target: el, props })
++       new App({ target: el, props, hydrate: true })
+    },
+})
 ```
 
 ```diff Svelte 5 icon="s"
-   import { createInertiaApp } from '@inertiajs/svelte'
-\-  import { mount } from 'svelte'
-\+  import { hydrate, mount } from 'svelte'
+import { createInertiaApp } from '@inertiajs/svelte'
+-  import { mount } from 'svelte'
++  import { hydrate, mount } from 'svelte'
 
-   createInertiaApp({
-     resolve: name => {
-       const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
-       return pages[`./Pages/${name}.svelte`]
-     },
-     setup({ el, App, props }) {
-\-      mount(App, { target: el, props })
-\+      if (el.dataset.serverRendered === 'true') {
-\+        hydrate(App, { target: el, props })
-\+      } else {
-\+        mount(App, { target: el, props })
-\+      }
-     },
-   })
+createInertiaApp({
+    resolve: name => {
+        const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true })
+        return pages[`./Pages/${name}.svelte`]
+    },
+    setup({ el, App, props }) {
+-       mount(App, { target: el, props })
++       if (el.dataset.serverRendered === 'true') {
++           hydrate(App, { target: el, props })
++       } else {
++           mount(App, { target: el, props })
++       }
+    },
+})
 ```
 
 </CodeGroup>
 
-<Svelte4Specific>You will also need to set the `hydratable` compiler option to `true` in your `vite.config.js` file:
+<Svelte4Specific>
+
+You will also need to set the `hydratable` compiler option to `true` in your `vite.config.js` file:
 
 ```diff
     import { svelte } from '@sveltejs/vite-plugin-svelte'
@@ -343,15 +354,18 @@ Since your website is now being server-side rendered, you can instruct <VueSpeci
                 ssr: 'resources/js/ssr.js',
                 refresh: true,
             }),
-\-     svelte(),
-\+     svelte({
-\+       compilerOptions: {
-\+         hydratable: true,
-\+       },
-\+     }),
+-     svelte(),
++     svelte({
++       compilerOptions: {
++         hydratable: true,
++       },
++     }),
         ],
     })
-```</Svelte4Specific>## Deployment
+```
+</Svelte4Specific>
+
+## Deployment
 
 When deploying your SSR enabled app to production, you'll need to build both the client-side ( `app.js`) and server-side bundles (`ssr.js`), and then run the SSR server as a background process, typically using a process monitoring tool such as Supervisor.
 

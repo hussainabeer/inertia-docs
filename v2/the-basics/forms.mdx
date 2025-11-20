@@ -2,6 +2,7 @@
 title: Forms
 ---
 
+import { ClientSpecific } from "/snippets/client-specific.jsx"
 import { ReactSpecific } from "/snippets/react-specific.jsx"
 import { SvelteSpecific } from "/snippets/svelte-specific.jsx"
 import { VueSpecific } from "/snippets/vue-specific.jsx"
@@ -54,7 +55,9 @@ export default () => (
 
 </CodeGroup>
 
+<ClientSpecific>
 Just like a traditional HTML form, there is no need to attach <VueSpecific>a `v-model`</VueSpecific><ReactSpecific>an `onChange` handler </ReactSpecific><SvelteSpecific>a `bind:`</SvelteSpecific>to your input fields, just give each input a `name` attribute <ReactSpecific>and a `defaultValue` (if applicable) </ReactSpecific>and the `Form` component will handle the data submission for you.
+</ClientSpecific>
 
 The component also supports nested data structures, file uploads, and dotted key notation.
 
@@ -182,7 +185,9 @@ export default () => (
 
 ### Default Values
 
+<ClientSpecific>
 You can set default values for form inputs using standard HTML attributes. Use <ReactSpecific>`defaultValue`</ReactSpecific><VueSpecific>`defaultValue`</VueSpecific><SvelteSpecific>`value`</SvelteSpecific>for text inputs and textareas, and <ReactSpecific>`defaultChecked`</ReactSpecific><VueSpecific>`defaultChecked`</VueSpecific><SvelteSpecific>`checked`</SvelteSpecific>for checkboxes and radios.
+</ClientSpecific>
 
 <CodeGroup>
 
@@ -516,7 +521,9 @@ In addition to `action` and `method`, the `<Form>` component accepts several pro
 
 Some props are intentionally grouped under `options` instead of being top-level to avoid confusion. For example, `only`, `except`, and `reset` relate to *partial reloads*, not *partial submissions*. The general rule: top-level props are for the form submission itself, while `options` control how Inertia handles the subsequent visit.
 
+<ClientSpecific>
 When setting the <ReactSpecific>`disableWhileProcessing`</ReactSpecific><SvelteSpecific>`disableWhileProcessing`</SvelteSpecific><VueSpecific>`disable-while-processing`</VueSpecific>prop, the `Form` component will add the `inert` attribute to the HTML `form`tag while the form is processing to prevent user interaction.
+</ClientSpecific>
 
 To style the form while it's processing, you can target the inert form in the following ways.
 
