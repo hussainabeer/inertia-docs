@@ -38,9 +38,15 @@ class UsersController extends Controller
 }
 ```
 
-However, when using Laravel, the [Ziggy](https://github.com/tighten/ziggy) library can make your named, server-side routes available to you via a global `route()` function. In fact, if you are developing an application using one of Laravel's [starter kits](https://laravel.com/docs/starter-kits), Ziggy is already configured for you.
+When using Laravel, you have several options to make your server-side routes available to your client-side code:
 
-If you're using the Vue plugin included with Ziggy, you may use the `route()` function directly in your templates.
+### Wayfinder
+
+When using [Wayfinder](https://github.com/laravel/wayfinder), you can pass the generated TypeScript method directly to the [Link component](/v2/the-basics/links#wayfinder), [form helpers](/v2/the-basics/forms#wayfinder), or [router methods](/v2/the-basics/manual-visits#wayfinder) and Inertia understand how to handle it. In fact, if you are developing an application using one of Laravel's [starter kits](https://laravel.com/docs/starter-kits), Wayfinder is already configured for you.
+
+### Ziggy
+
+The [Ziggy](https://github.com/tighten/ziggy) library can make your named, server-side routes available to you via a global `route()` function. If you're using the Vue plugin included with Ziggy, you may use the `route()` function directly in your templates.
 
 ```vue
 <Link :href="route('users.create')">Create User</Link>
