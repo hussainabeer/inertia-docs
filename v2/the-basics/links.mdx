@@ -4,7 +4,7 @@ title: Links
 
 To create links to other pages within an Inertia app, you will typically use the Inertia `<Link>` component. This component is a light wrapper around a standard anchor `<a>` link that intercepts click events and prevents full page reloads. This is [how Inertia provides a single-page app experience](/v2/core-concepts/how-it-works) once your application has been loaded.
 
-## Creating links
+## Creating Links
 
 To create an Inertia link, use the Inertia `<Link>` component. Any attributes you provide to this component will be proxied to the underlying HTML tag.
 
@@ -158,7 +158,7 @@ import { inertia, Link } from '@inertiajs/svelte'
 
 </CodeGroup>
 
-## Custom headers
+## Custom Headers
 
 The `headers` prop allows you to add custom headers to an Inertia link. However, the headers Inertia uses internally to communicate its state to the server take priority and therefore cannot be overwritten.
 
@@ -186,7 +186,7 @@ import { inertia, Link } from '@inertiajs/svelte'
 
 </CodeGroup>
 
-## Browser history
+## Browser History
 
 The `replace` prop allows you to specify the browser's history behavior. By default, page visits push (new) state (`window.history.pushState`) into the history; however, it's also possible to replace state (`window.history.replaceState`) by setting the `replace` prop to `true`. This will cause the visit to replace the current history state instead of adding a new history state to the stack.
 
@@ -214,7 +214,7 @@ import { inertia, Link } from '@inertiajs/svelte'
 
 </CodeGroup>
 
-## State preservation
+## State Preservation
 
 You can preserve a page component's local state using the `preserve-state` prop. This will prevent a page component from fully re-rendering. The `preserve-state` prop is especially helpful on pages that contain forms, since you can avoid manually repopulating input fields and can also maintain a focused input.
 
@@ -248,7 +248,7 @@ import { inertia, Link } from '@inertiajs/svelte'
 
 </CodeGroup>
 
-## Scroll preservation
+## Scroll Preservation
 
 You can use the `preserveScroll` prop to prevent Inertia from automatically resetting the scroll position when making a page visit.
 
@@ -278,7 +278,7 @@ import { inertia, Link } from '@inertiajs/svelte'
 
 For more information on managing scroll position, check out the documentation on [scroll management](/v2/advanced/scroll-management).
 
-## Partial reloads
+## Partial Reloads
 
 The `only` prop allows you to specify that only a subset of a page's props (data) should be retrieved from the server on subsequent visits to that page.
 
@@ -308,7 +308,7 @@ import { inertia, Link } from '@inertiajs/svelte'
 
 For more information on this topic, check out the complete documentation on [partial reloads](/v2/data-props/partial-reloads).
 
-## View transitions
+## View Transitions
 
 You may enable [View transitions](/v2/the-basics/view-transitions) for a link by setting the `viewTransition` prop to `true`. This will use the browser's View Transitions API to animate the page transition.
 
@@ -334,7 +334,7 @@ import { Link } from '@inertiajs/svelte'
 
 </CodeGroup>
 
-## Active states
+## Active States
 
 It's common to set an active state for navigation links based on the current page. This can be accomplished when using Inertia by inspecting the `page` object and doing string comparisons against the `page.url` and `page.component` properties.
 
@@ -396,6 +396,6 @@ You can perform exact match comparisons (`===`), `startsWith()` comparisons (use
 
 Using this approach, you're not limited to just setting class names. You can use this technique to conditionally render any markup on active state, such as different link text or even an SVG icon that represents the link is active.
 
-## Data loading attribute
+## Data Loading Attribute
 
 While a link is making an active request, a `data-loading` attribute is added to the link element. This allows you to style the link while it's in a loading state. The attribute is removed once the request is complete.

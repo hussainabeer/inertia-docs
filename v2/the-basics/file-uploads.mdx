@@ -2,7 +2,7 @@
 title: File Uploads
 ---
 
-## FormData conversion
+## Formdata Conversion
 
 When making Inertia requests that include files (even nested files), Inertia will automatically convert the request data into a `FormData` object. This conversion is necessary in order to submit a `multipart/form-data` request via XHR.
 
@@ -38,7 +38,7 @@ router.post('/users', data, {
 
 You can learn more about the `FormData` interface via its [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/API/FormData).
 
-## File upload example
+## File Upload Example
 
 Let's examine a complete file upload example using Inertia. This example includes both a `name` text input and an `avatar` file input.
 
@@ -154,7 +154,7 @@ return (
 
 This example uses the [Inertia form helper](/forms#form-helper) for convenience, since the form helper provides easy access to the current upload progress. However, you are free to submit your forms using [manual Inertia visits](/v2/the-basics/manual-visits) as well.
 
-## Multipart limitations
+## Multipart Limitations
 
 Uploading files using a `multipart/form-data` request is not natively supported in some server-side frameworks when using the `PUT`,`PATCH`, or `DELETE` HTTP methods. The simplest workaround for this limitation is to simply upload files using a `POST` request instead.
 

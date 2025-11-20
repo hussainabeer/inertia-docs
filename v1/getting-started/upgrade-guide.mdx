@@ -6,7 +6,7 @@ title: Upgrade Guide for v1.0
 
 You can find the legacy docs for Inertia.js v0.11 at [legacy.inertiajs.com](https://legacy.inertiajs.com).
 
-## What's new
+## What's New
 
 Inertia.js v1.0 focuses on simplifying the overall architecture of the project with the goal of making Inertia easier to maintain and easier to use.
 
@@ -14,7 +14,7 @@ It includes a number of breaking changes, mostly related to package names and up
 
 For a complete list of all the changes, see the [release notes](https://github.com/inertiajs/inertia/releases/tag/v1.0.0).
 
-## New dependencies
+## New Dependencies
 
 To use previous Inertia releases, you had to install a number of libraries, including the core library ( `@inertiajs/inertia`), the adapter of your choice ( `@inertiajs/inertia-vue|vue3|react|svelte`), the progress library (`@inertiajs/progress`), and if you were using server-side rendering, the server library (`@inertiajs/server`).
 
@@ -64,7 +64,7 @@ npm install @inertiajs/svelte
 
 </CodeGroup>
 
-## Renamed imports
+## Renamed Imports
 
 Next, update all the Inertia related imports in your project to use the new adapter library name. All imports are now available from the adapter library, meaning you no longer import anything from the Inertia core library, progress library, or server library.
 
@@ -250,7 +250,7 @@ progress: false,
 })
 ```
 
-## Setup arguments
+## Setup Arguments
 
 We've removed the previously deprecated lowercase `app` argument from the `setup()` method in `createInertiaApp()`. Use `App` instead.
 
@@ -264,7 +264,7 @@ createInertiaApp({
 })
 ```
 
-## Simplified usePage
+## Simplified Usepage
 
 In the Vue 3 adapter, we simplified the `usePage()` hook to no longer require adding `.value` after the `component`, `props`, `url` and `version` properties.
 

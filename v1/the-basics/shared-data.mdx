@@ -6,7 +6,7 @@ title: Shared Data
 
 Sometimes you need to access specific pieces of data on numerous pages within your application. For example, you may need to display the current user in the site header. Passing this data manually in each response across your entire application is cumbersome. Thankfully, there is a better option: shared data.
 
-## Sharing data
+## Sharing Data
 
 Inertia's server-side adapters all provide a method of making shared data available for every request. This is typically done outside of your controllers. Shared data will be automatically merged with the page props provided in your controller.
 
@@ -49,7 +49,7 @@ Shared data should be used sparingly as all shared data is included with every r
 
 Page props and shared data are merged together, so be sure to namespace your shared data appropriately to avoid collisions.
 
-## Accessing shared data
+## Accessing Shared Data
 
 Once you have shared the data server-side, you will be able to access it within any of your pages or components. Here's an example of how to access shared data in a layout component.
 
@@ -136,7 +136,7 @@ export default function Layout({ children }) {
 
 </CodeGroup>
 
-## Flash messages
+## Flash Messages
 
 Another great use-case for shared data is flash messages. These are messages stored in the session only for the next request. For example, it's common to set a flash message after completing a task and before redirecting to a different page.
 

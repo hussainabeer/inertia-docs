@@ -2,13 +2,13 @@
 title: Scroll Management
 ---
 
-## Scroll resetting
+## Scroll Resetting
 
 When navigating between pages, Inertia mimics default browser behavior by automatically resetting the scroll position of the document body (as well as any [scroll regions](#scroll-regions) you've defined) back to the top.
 
 In addition, Inertia keeps track of the scroll position of each page and automatically restores that scroll position as you navigate forward and back in history.
 
-## Scroll preservation
+## Scroll Preservation
 
 Sometimes it's desirable to prevent the default scroll resetting when making visits. You can disable this behavior by setting the `preserveScroll` option to `true`.
 
@@ -114,7 +114,7 @@ import { inertia, Link } from '@inertiajs/svelte'
 
 </CodeGroup>
 
-## Scroll regions
+## Scroll Regions
 
 If your app doesn't use document body scrolling, but instead has scrollable elements (using the `overflow` CSS property), scroll resetting will not work.
 
@@ -126,7 +126,7 @@ In these situations, you must tell Inertia which scrollable elements to manage b
 </div>
 ```
 
-## Text fragments
+## Text Fragments
 
 [Text fragments](https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Fragment/Text_fragments) allow you to link directly to specific text on a page using a special URL syntax like `#:~:text=term`. However, the browser removes the fragment directive before any JavaScript runs, so text fragments only work if the targeted text is present in the initial HTML response.
 

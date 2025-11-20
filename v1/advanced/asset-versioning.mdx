@@ -31,7 +31,7 @@ Inertia::version($version);
 Inertia::version(fn () => $version); // Lazily...
 ```
 
-## Cache busting
+## Cache Busting
 
 Asset refreshing in Inertia works on the assumption that a hard page visit will trigger your assets to reload. However, Inertia doesn't actually do anything to force this. Typically this is done with some form of cache busting. For example, appending a version query parameter to the end of your asset URLs.
 

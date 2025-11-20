@@ -8,7 +8,7 @@ As an example, consider a "user index" page that includes a list of users, as we
 
 Partial reloads only work for visits made to the same page component.
 
-## Only certain props
+## Only Certain Props
 
 To perform a partial reload, use the `only` visit option to specify which data the server should return. This option should be an array of keys which correspond to the keys of the props.
 
@@ -40,7 +40,7 @@ router.visit(url, {
 
 </CodeGroup>
 
-## Except certain props
+## Except Certain Props
 
 In addition to the `only` visit option you can also use the `except` option to specify which data the server should exclude. This option should also be an array of keys which correspond to the keys of the props.
 
@@ -72,7 +72,7 @@ router.visit(url, {
 
 </CodeGroup>
 
-## Router shorthand
+## Router Shorthand
 
 Since partial reloads can only be made to the same page component the user is already on, it almost always makes sense to just use the `router.reload()` method, which automatically uses the current URL.
 
@@ -98,7 +98,7 @@ router.reload({ only: ['users'] })
 
 </CodeGroup>
 
-## Using links
+## Using Links
 
 It's also possible to perform partial reloads with Inertia links using the `only` property.
 
@@ -126,7 +126,7 @@ import { inertia, Link } from '@inertiajs/svelte'
 
 </CodeGroup>
 
-## Lazy data evaluation
+## Lazy Data Evaluation
 
 For partial reloads to be most effective, be sure to also use lazy data evaluation when returning props from your server-side routes or controllers. This can be accomplished by wrapping all optional page data in a closure.
 

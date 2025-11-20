@@ -10,7 +10,7 @@ The `<Head>` component will only replace `<head>` elements that are not in your 
 
 The `<Head>` component is not available in the Svelte adapter, as Svelte already ships with its own `<svelte:head>` component.
 
-## Head component
+## Head Component
 
 To add `<head>` elements to your page, use the `<Head>` component. Within this component, you can include the elements that you wish to add to the document `<head>`.
 
@@ -52,7 +52,7 @@ import { Head } from '@inertiajs/react'
 
 </CodeGroup>
 
-## Title shorthand
+## Title Shorthand
 
 If you only need to add a `<title>` to the document `<head>`, you may simply pass the title as a prop to the `<Head>` component.
 
@@ -82,7 +82,7 @@ import { Head } from '@inertiajs/react'
 
 </CodeGroup>
 
-## Title callback
+## Title Callback
 
 You can globally modify the page `<title>` using the `title` callback in the `createInertiaApp` setup method. Typically, this method is invoked in your application's main JavaScript file. A common use case for the title callback is automatically adding an app name before or after each page title.
 
@@ -159,7 +159,7 @@ import { Head } from '@inertiajs/react'
 
 </CodeGroup>
 
-## Multiple Head instances
+## Multiple Head Instances
 
 It's possible to have multiple instances of the `<Head>` component throughout your application. For example, your layout can set some default `<Head>` elements, and then your individual pages can override those defaults.
 
@@ -246,7 +246,7 @@ The code example above will render the following HTML.
 </head>
 ```
 
-## Head extension
+## Head Extension
 
 When building a real application, it can sometimes be helpful to create a custom head component that extends Inertia's `<Head>` component. This gives you a place to set app-wide defaults, such as appending the app name to the page title.
 

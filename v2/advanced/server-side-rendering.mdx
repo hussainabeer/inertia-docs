@@ -12,7 +12,7 @@ Server-side rendering pre-renders your JavaScript pages on the server, allowing 
 
 Server-side rendering uses Node.js to render your pages in a background process; therefore, Node must be available on your server for server-side rendering to function properly.
 
-## Laravel starter kits
+## Laravel Starter Kits
 
 If you are using [Laravel Starter Kits](https://laravel.com/docs/starter-kits), Inertia SSR is [supported](https://laravel.com/docs/starter-kits#inertia-ssr) through a build command:
 
@@ -20,7 +20,7 @@ If you are using [Laravel Starter Kits](https://laravel.com/docs/starter-kits), 
 npm run build:ssr
 ```
 
-## Install dependencies
+## Install Dependencies
 
 If you are not using a Laravel starter kit and would like to manually configure SSR, we'll first install the additional dependencies required for server-side rendering. This is only necessary for the Vue adapters, so you can skip this step if you're using React or Svelte.
 
@@ -40,7 +40,7 @@ npm install @vue/server-renderer
 
 </CodeGroup>
 
-## Add server entry-point
+## Add Server Entry-Point
 
 Next, we'll create a `resources/js/ssr.js` file within our Laravel project that will serve as our SSR entry point.
 
@@ -213,7 +213,7 @@ refresh: true,
 })
 ```
 
-## Update npm script
+## Update NPM Script
 
 Next, let's update the `build` script in our `package.json` file to also build our new `ssr.js` file.
 
@@ -231,7 +231,7 @@ Now you can build both your client-side and server-side bundles.
 npm run build
 ```
 
-## Running the SSR server
+## Running the SSR Server
 
 Now that you have built both your client-side and server-side bundles, you should be able run the Node-based Inertia SSR server using the following command.
 
@@ -247,7 +247,7 @@ php artisan inertia:start-ssr --runtime=bun
 
 With the server running, you should be able to access your app within the browser with server-side rendering enabled. In fact, you should be able to disable JavaScript entirely and still navigate around your application.
 
-## Client side hydration
+## Client Side Hydration
 
 Since your website is now being server-side rendered, you can instruct <VueSpecific>Vue</VueSpecific><ReactSpecific>React</ReactSpecific><SvelteSpecific>Svelte</SvelteSpecific> to "hydrate" the static markup and make it interactive instead of re-rendering all the HTML that we just generated.
 

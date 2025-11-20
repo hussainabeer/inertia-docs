@@ -12,7 +12,7 @@ When building applications using Inertia, each page in your application typicall
 
 In addition, all of the data needed for the page can be retrieved before the page is ever rendered by the browser, eliminating the need for displaying "loading" states when users visit your application.
 
-## Creating pages
+## Creating Pages
 
 Inertia pages are simply JavaScript components. If you have ever written a Vue, React, or Svelte component, you will feel right at home. As you can see in the example below, pages receive data from your application's controllers as props.
 
@@ -109,7 +109,7 @@ class UserController extends Controller
 }
 ```
 
-## Creating layouts
+## Creating Layouts
 
 While not required, for most projects it makes sense to create a site layout that all of your pages can extend. You may have noticed in our page example above that we're wrapping the page content within a `{`<layout>`}</layout>` component. Here's an example of such a component:
 
@@ -197,7 +197,7 @@ export default function Layout({ children }) {
 
 As you can see, there is nothing Inertia specific within this template. This is just a typical <VueSpecific>Vue</VueSpecific><ReactSpecific>React</ReactSpecific><SvelteSpecific>Svelte</SvelteSpecific> component.
 
-## Persistent layouts
+## Persistent Layouts
 
 While it's simple to implement layouts as children of page components, it forces the layout instance to be destroyed and recreated between visits. This means you cannot have persistent layout state when navigating between pages.
 

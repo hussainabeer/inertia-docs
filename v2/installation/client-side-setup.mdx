@@ -1,5 +1,5 @@
 ---
-title: Client-side Setup
+title: Client-Side Setup
 ---
 
 Once you have your [server-side framework configured](/v2/installation/server-side-setup), you then need to setup your client-side framework. Inertia currently provides support for React, Vue, and Svelte.
@@ -107,7 +107,7 @@ These starter kits are the absolute fastest way to start building a new Inertia 
     </Step>
 </Steps>
 
-## Configuring defaults
+## Configuring Defaults
 
 You may pass a `defaults` object to `createInertiaApp()` to configure default settings for various features. You don't have to pass a default for every key, just the ones you want to tweak.
 
@@ -136,7 +136,7 @@ createInertiaApp({
 
 The `visitOptions` callback receives the target URL and the current visit options, and should return an object with any options you want to override. For more details on the available configuration options, see the [forms](/forms#form-errors), [prefetching](/v2/data-props/prefetching), and [manual visits](/manual-visits#global-visit-options) documentation.
 
-### Updating configuration at runtime
+### Updating Configuration at Runtime
 
 You may also update configuration values at runtime using the exported `config` instance. This is particularly useful when you need to adjust settings based on user preferences or application state.
 
@@ -192,7 +192,7 @@ const duration = config.get('form.recentlySuccessfulDuration')
 
 </CodeGroup>
 
-## Resolving components
+## Resolving Components
 
 The `resolve` callback tells Inertia how to load a page component. It receives a page name (string), and returns a page component module. How you implement this callback depends on which bundler (Vite or Webpack) you're using.
 
@@ -235,7 +235,7 @@ resolve: name => require(`./Pages/${name}.svelte`),
 
 By default we recommend eager loading your components, which will result in a single JavaScript bundle. However, if you'd like to lazy-load your components, see our [code splitting](/v2/advanced/code-splitting) documentation.
 
-## Defining a root element
+## Defining a Root Element
 
 By default, Inertia assumes that your application's root template has a root element with an `id` of `app`. If your application's root element has a different `id`, you can provide it using the `id` property.
 

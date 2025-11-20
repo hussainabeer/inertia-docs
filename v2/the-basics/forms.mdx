@@ -8,7 +8,7 @@ import { VueSpecific } from "/snippets/vue-specific.jsx"
 
 Inertia provides two primary ways to build forms: the `<Form>` component and the `useForm` helper. Both integrate with your server-side framework's validation and handle form submissions without full page reloads.
 
-## Form component
+## Form Component
 
 Inertia provides a `<Form>` component that behaves much like a classic HTML form, but uses Inertia under the hood to avoid full page reloads. This is the simplest way to get started with forms in Inertia.
 
@@ -180,7 +180,7 @@ export default () => (
 
 </CodeGroup>
 
-### Default values
+### Default Values
 
 You can set default values for form inputs using standard HTML attributes. Use <ReactSpecific>`defaultValue`</ReactSpecific><VueSpecific>`defaultValue`</VueSpecific><SvelteSpecific>`value`</SvelteSpecific>for text inputs and textareas, and <ReactSpecific>`defaultChecked`</ReactSpecific><VueSpecific>`defaultChecked`</VueSpecific><SvelteSpecific>`checked`</SvelteSpecific>for checkboxes and radios.
 
@@ -236,11 +236,11 @@ You can set default values for form inputs using standard HTML attributes. Use <
 
 </CodeGroup>
 
-### Checkbox inputs
+### Checkbox Inputs
 
 When working with checkboxes, you may want to add an explicit `value` attribute such as `value="1"`. Without a value attribute, checked checkboxes will submit as `"on"`, which some server-side validation rules may not recognize as a proper boolean value.
 
-### Slot props
+### Slot Props
 
 The `<Form>` component exposes reactive state and helper methods through its default slot, giving you access to form processing state, errors, and utility functions.
 
@@ -428,7 +428,7 @@ The `errors` object uses dotted notation for nested fields, allowing you to disp
 
 </CodeGroup>
 
-### Props and options
+### Props and Options
 
 In addition to `action` and `method`, the `<Form>` component accepts several props. Many of them are identical to the options available in Inertia's [visit options](/v2/the-basics/manual-visits).
 
@@ -734,7 +734,7 @@ The `Form` component provides several attributes that allow you to reset the for
 
 </CodeGroup>
 
-### Setting new default values
+### Setting New Default Values
 
 The `Form` component provides the `setDefaultsOnSuccess` attribute to set the current form values as the new defaults after a successful submission.
 
@@ -766,7 +766,7 @@ The `Form` component provides the `setDefaultsOnSuccess` attribute to set the cu
 
 </CodeGroup>
 
-### Dotted key notation
+### Dotted Key Notation
 
 The `<Form>` component supports dotted key notation for creating nested objects from flat input names. This provides a convenient way to structure form data.
 
@@ -856,7 +856,7 @@ The example above would generate the following data structure.
 }
 ```
 
-### Programmatic access
+### Programmatic Access
 
 You can access the form's methods programmatically using refs. This provides an alternative to [slot props](#slot-props) when you need to trigger form actions from outside the form.
 
@@ -931,7 +931,7 @@ export default function CreateUser() {
 
 In React and Vue, refs provide access to all form methods and reactive state. In Svelte, refs expose only methods, so reactive state like `isDirty` and `errors` should be accessed via [slot props](#slot-props) instead.
 
-## Form helper
+## Form Helper
 
 In addition to the `<Form>` component, Inertia also provides a `useForm` helper for when you need programmatic control over your form's data and submission behavior.
 
@@ -1198,7 +1198,7 @@ const { progress } = useForm({ ... })
 
 </CodeGroup>
 
-### Form errors
+### Form Errors
 
 If there are form validation errors, they are available via the `errors` property. When building Laravel powered Inertia applications, form errors will automatically be populated when your application throws instances of `ValidationException`, such as when using `{'$request->validate()'}`.
 
@@ -1369,7 +1369,7 @@ $form.resetAndClearErrors('field', 'anotherfield')
 
 </CodeGroup>
 
-### Setting new default values
+### Setting New Default Values
 
 If your form's default values become outdated, you can use the `defaults()` method to update them. Then, the form will be reset to the correct values the next time the `reset()` method is invoked.
 
@@ -1421,7 +1421,7 @@ $form.defaults({
 
 </CodeGroup>
 
-### Form field change tracking
+### Form Field Change Tracking
 
 To determine if a form has any changes, you may use the `isDirty` property.
 
@@ -1445,7 +1445,7 @@ const { isDirty } = useForm({ ... })
 
 </CodeGroup>
 
-### Canceling Form submissions
+### Canceling Form Submissions
 
 To cancel a form submission, use the `cancel()` method.
 
@@ -1467,7 +1467,7 @@ $form.cancel()
 
 </CodeGroup>
 
-### Form data and history state
+### Form Data and History State
 
 To instruct Inertia to store a form's data and errors in [history state](/v2/data-props/remembering-state), you can provide a unique form key as the first argument when instantiating your form.
 
@@ -1542,7 +1542,7 @@ form.submit(store())
 
 </CodeGroup>
 
-## Server-side responses
+## Server-Side Responses
 
 When using Inertia, you don't typically inspect form responses client-side like you would with traditional XHR/fetch requests. Instead, your server-side route or controller issues a [redirect](/v2/the-basics/redirects) response after processing the form, often redirecting to a success page.
 
@@ -1571,7 +1571,7 @@ class UsersController extends Controller
 
 This redirect-based approach works with all form submission methods: the `<Form>` component, `useForm` helper, and manual router submissions. It makes handling Inertia forms feel very similar to classic server-side form submissions.
 
-## Server-side validation
+## Server-Side Validation
 
 Both the `<Form>` component and `useForm` helper automatically handle server-side validation errors. When your server returns validation errors, they're automatically available in the `errors` object without any additional configuration.
 
@@ -1579,7 +1579,7 @@ Unlike traditional XHR/fetch requests where you might check for a `422` status c
 
 For a complete guide on validation error handling, including error bags and advanced scenarios, see the [validation documentation](/v2/the-basics/validation).
 
-## Manual form submissions
+## Manual Form Submissions
 
 It's also possible to submit forms manually using Inertia's `router` methods directly, without using the `<Form>` component or `useForm` helper:
 
@@ -1714,12 +1714,12 @@ export default function Edit() {
 
 </CodeGroup>
 
-## File uploads
+## File Uploads
 
 When making requests or form submissions that include files, Inertia will automatically convert the request data into a `FormData` object. This works with the `<Form>` component, `useForm`helper, and manual router submissions.
 
 For more information on file uploads, including progress tracking, see the [file uploads documentation](/v2/the-basics/file-uploads).
 
-## XHR / fetch submissions
+## XHR / Fetch Submissions
 
 Using Inertia to submit forms works great for the vast majority of situations. However, in the event that you need more control over the form submission, you're free to make plain XHR or `fetch` requests instead, using the library of your choice.

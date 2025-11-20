@@ -4,7 +4,7 @@ title: Events
 
 Inertia provides an event system that allows you to "hook into" the various lifecycle events of the library.
 
-## Registering listeners
+## Registering Listeners
 
 To register an event listener, use the `router.on()` method.
 
@@ -66,7 +66,7 @@ document.addEventListener('inertia:start', (event) => {
 
 </CodeGroup>
 
-## Removing listeners
+## Removing Listeners
 
 When you register an event listener, Inertia automatically returns a callback that can be invoked to remove the event listener.
 
@@ -201,7 +201,7 @@ document.removeEventListener('inertia:start', startEventListener)
 
 </CodeGroup>
 
-## Cancelling events
+## Cancelling Events
 
 Some events, such as `before`, `exception`, and `invalid`, support cancellation, allowing you to prevent Inertia's default behavior. Just like native events, the event will be cancelled if only one event listener calls `event.preventDefault()`.
 
@@ -748,6 +748,6 @@ router.on('prefetched', (event) => {
 
 The `prefetched` event is not cancelable.
 
-## Event callbacks
+## Event Callbacks
 
 In addition to the global events described throughout this page, Inertia also provides a number of [event callbacks](/manual-visits#event-callbacks) that fire when manually making Inertia visits.

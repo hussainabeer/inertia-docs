@@ -2,7 +2,7 @@
 title: CSRF Protection
 ---
 
-## Making requests
+## Making Requests
 
 Laravel automatically includes the proper CSRF token when making requests via Inertia or Axios. However, if you're using Laravel, be sure to omit the `csrf-token` meta tag from your project, as this will prevent the CSRF token from refreshing properly.
 
@@ -58,7 +58,7 @@ Axios automatically checks for the existence of an `XSRF-TOKEN` cookie. If it's 
 
 The easiest way to implement this is using server-side middleware. Simply include the `XSRF-TOKEN`cookie on each response, and then verify the token using the `X-XSRF-TOKEN` header sent in the requests from axios.
 
-## Handling mismatches
+## Handling Mismatches
 
 When a CSRF token mismatch occurs, your server-side framework will likely throw an exception that results in an error response. For example, when using Laravel, a `TokenMismatchException` is thrown which results in a `419` error page. Since that isn't a valid Inertia response, the error is shown in a modal.
 

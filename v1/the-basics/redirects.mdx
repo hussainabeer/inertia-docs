@@ -32,13 +32,13 @@ class UsersController extends Controller
 }
 ```
 
-## 303 response code
+## 303 Response Code
 
 When redirecting after a `PUT`, `PATCH`, or `DELETE` request, you must use a `303` response code, otherwise the subsequent request will not be treated as a `GET`request. A `303` redirect is very similar to a `302` redirect; however, the follow-up request is explicitly changed to a `GET` request.
 
 If you're using one of our official server-side adapters, all redirects will automatically be converted to `303` redirects.
 
-## External redirects
+## External Redirects
 
 Sometimes it's necessary to redirect to an external website, or even another non-Inertia endpoint in your app while handling an Inertia request. This can be accomplished using a server-side initiated `window.location` visit via the `Inertia::location()` method.
 

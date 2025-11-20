@@ -6,7 +6,7 @@ Inertia overwrites props with the same name when reloading a page. However, you 
 
 Prop merging only works during [partial reloads](/v2/data-props/partial-reloads). Full page visits will always replace props entirely, even if you've marked them for merging.
 
-## Merge methods
+## Merge Methods
 
 To merge a prop instead of overwriting it, you may use the `Inertia::merge()` method when returning your response.
 
@@ -64,7 +64,7 @@ Inertia::merge($dashboardData)
 
 On the client side, Inertia handles all the merging automatically according to your server-side configuration.
 
-## Matching items
+## Matching Items
 
 When merging arrays, you may use the `matchOn` parameter to match existing items by a specific field and update them instead of appending new ones.
 
@@ -81,7 +81,7 @@ Inertia::merge($complexData)->append([
 
 In the first example, Inertia will iterate over the `data` array and attempt to match each item by its `id` field. If a match is found, the existing item will be replaced. If no match is found, the new item will be appended.
 
-## Deep merge
+## Deep Merge
 
 Instead of specifying which nested paths should be merged, you may use `Inertia::deepMerge()`to ensure a deep merge of the entire structure.
 
@@ -103,11 +103,11 @@ Route::get('/chat', function () {
 
 `Inertia::deepMerge()` was introduced before `Inertia::merge()` had support for prepending and targeting nested paths. In most cases, `Inertia::merge()` with its append and prepend methods should be sufficient.
 
-## Client side visits
+## Client Side Visits
 
 You can also merge props directly on the client side without making a server request using [client side visits](/manual-visits#client-side-visits). Inertia provides [prop helper methods](/manual-visits#prop-helpers) that allow you to append, prepend, or replace prop values.
 
-## Combining with deferred props
+## Combining with Deferred Props
 
 You can also combine [deferred props](/v2/data-props/deferred-props) with mergeable props to defer the loading of the prop and ultimately mark it as mergeable once it's loaded.
 
@@ -122,7 +122,7 @@ Route::get('/users', function () {
 });
 ```
 
-## Resetting props
+## Resetting Props
 
 On the client side, you can indicate to the server that you would like to reset the prop. This is useful when you want to clear the prop value before merging new data, such as when the user enters a new search query on a paginated list.
 

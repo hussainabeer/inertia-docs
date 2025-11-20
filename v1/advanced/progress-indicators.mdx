@@ -102,7 +102,7 @@ router.on('finish', () => NProgress.done())
 
 That's it! Now, as you navigate from one page to another, the progress bar will be added and removed from the page.
 
-### Handling cancelled visits
+### Handling Cancelled Visits
 
 While this custom progress implementation works great for page visits that finish properly, it would be nice to handle cancelled visits as well. First, for interrupted visits (those that get cancelled as a result of a new visit), the progress bar should simply be reset back to the start position. Second, for manually cancelled visits, the progress bar should be immediately removed from the page.
 
@@ -121,7 +121,7 @@ NProgress.remove()
 })
 ```
 
-### File upload progress
+### File Upload Progress
 
 Let's take this a step further. When files are being uploaded, it would be great to update the loading indicator to reflect the upload progress. This can be done using the `progress` event.
 
@@ -135,7 +135,7 @@ NProgress.set((event.detail.progress.percentage / 100) * 0.9)
 
 Now, instead of the progress bar "trickling" while the files are being uploaded, it will actually update it's position based on the progress of the request. We limit the progress here to 90%, since we still need to wait for a response from the server.
 
-### Loading indicator delay
+### Loading Indicator Delay
 
 The last thing we're going to implement is a loading indicator delay. It's often preferable to delay showing the loading indicator until a request has taken longer than 250-500 milliseconds. This prevents the loading indicator from appearing constantly on quick page visits, which can be visually distracting.
 
@@ -187,7 +187,7 @@ return
 
 That's it, you now have a beautiful custom page loading indicator!
 
-### Complete example
+### Complete Example
 
 For convenience, here is the full source code of the final version of our custom loading indicator.
 

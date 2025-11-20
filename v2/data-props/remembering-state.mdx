@@ -8,7 +8,7 @@ For example, if a user partially completes a form, then navigates away, and then
 
 To mitigate this issue, you can tell Inertia which local component state to save in the browser history.
 
-## Saving local state
+## Saving Local State
 
 To save local component state to the history state, use the `useRemember` feature to tell Inertia which data it should remember.
 
@@ -52,7 +52,7 @@ const form = useRemember({
 
 Now, whenever your local `form` state changes, Inertia will automatically save this data to the history state and will also restore it on history navigation.
 
-## Multiple components
+## Multiple Components
 
 If your page contains multiple components that use the remember functionality provided by Inertia, you need to provide a unique key for each component so that Inertia knows which data to restore to each component.
 
@@ -126,7 +126,7 @@ const form = useRemember({
 
 </CodeGroup>
 
-## Form helper
+## Form Helper
 
 If you're using the [Inertia form helper](/forms#form-helper), you can pass a unique form key as the first argument when instantiating your form. This will cause the form data and errors to automatically be remembered.
 
@@ -155,7 +155,7 @@ const form = useForm(`EditUser:${user.id}`, data)
 
 </CodeGroup>
 
-## Manually saving state
+## Manually Saving State
 
 The `useRemember` hook watches for data changes and automatically saves those changes to the history state. Then, Inertia will restore the data on page load.
 

@@ -323,7 +323,7 @@ router.post('/users', {
 
 </CodeGroup>
 
-## Custom headers
+## Custom Headers
 
 The `headers` option allows you to add custom headers to a request.
 
@@ -363,7 +363,7 @@ router.post('/users', data, {
 
 The headers Inertia uses internally to communicate its state to the server take priority and therefore cannot be overwritten.
 
-## Global visit options
+## Global Visit Options
 
 You may configure a `visitOptions` callback when [initializing your Inertia app](/client-side-setup#configuring-defaults) to modify visit options globally for every request. The callback receives the target URL and the current visit options, and should return an object with any options you want to override.
 
@@ -427,7 +427,7 @@ createInertiaApp({
 
 </CodeGroup>
 
-## File uploads
+## File Uploads
 
 When making visits / requests that include files, Inertia will automatically convert the request data into a `FormData` object. If you would like the request to always use a `FormData` object, you may use the `forceFormData` option.
 
@@ -461,7 +461,7 @@ router.post('/companies', data, {
 
 For more information on uploading files, check out the dedicated [file uploads](/v2/the-basics/file-uploads) documentation.
 
-## Browser history
+## Browser History
 
 When making visits, Inertia automatically adds a new entry into the browser history. However, it's also possible to replace the current history entry by setting the `replace` option to `true`.
 
@@ -489,7 +489,7 @@ router.get('/users', { search: 'John' }, { replace: true })
 
 Visits made to the same URL automatically set `replace` to `true`.
 
-## Client side visits
+## Client Side Visits
 
 You can use the `router.push` and `router.replace` method to make client-side visits. This method is useful when you want to update the browser's history without making a server request.
 
@@ -593,7 +593,7 @@ router.replace({
 
 Make sure that any route you push on the client side is also defined on the server side. If the user refreshes the page, the server will need to know how to render the page.
 
-### Prop helpers
+### Prop Helpers
 
 Inertia provides three helper methods for updating page props without making server requests. These methods are shortcuts to `router.replace()` and automatically set `preserveScroll` and `preserveState` to `true`.
 
@@ -673,7 +673,7 @@ router.prependToProp('notifications', (current, props) => {
 
 </CodeGroup>
 
-## State preservation
+## State Preservation
 
 By default, page visits to the same page create a fresh page component instance. This causes any local state, such as form inputs, scroll positions, and focus states to be lost.
 
@@ -759,7 +759,7 @@ router.post('/users', data, {
 
 </CodeGroup>
 
-## Scroll preservation
+## Scroll Preservation
 
 When navigating between pages, Inertia mimics default browser behavior by automatically resetting the scroll position of the document body (as well as any [scroll regions](/scroll-management#scroll-regions) you've defined) back to the top of the page.
 
@@ -843,7 +843,7 @@ router.post('/users', data, {
 
 For more information regarding this feature, please consult the [scroll management](/v2/advanced/scroll-management) documentation.
 
-## Partial reloads
+## Partial Reloads
 
 The `only` option allows you to request a subset of the props (data) from the server on subsequent visits to the same page, thus making your application more efficient since it does not need to retrieve data that the page is not interested in refreshing.
 
@@ -871,7 +871,7 @@ router.get('/users', { search: 'John' }, { only: ['users'] })
 
 For more information on this feature, please consult the [partial reloads](/v2/data-props/partial-reloads) documentation.
 
-## View transitions
+## View Transitions
 
 You may enable [View transitions](/v2/the-basics/view-transitions) for a visit by setting the `viewTransition` option to `true`. This will use the browser's View Transitions API to animate the page transition.
 
@@ -897,7 +897,7 @@ router.visit('/another-page', { viewTransition: true })
 
 </CodeGroup>
 
-## Visit cancellation
+## Visit Cancellation
 
 You can cancel a visit using a cancel token, which Inertia automatically generates and provides via the `onCancelToken()` callback prior to making the visit.
 
@@ -940,7 +940,7 @@ this.cancelToken.cancel()
 
 The `onCancel()` and `onFinish()` event callbacks will be executed when a visit is cancelled.
 
-## Event callbacks
+## Event Callbacks
 
 In addition to Inertia's [global events](/v2/advanced/events), Inertia also provides a number of per-visit event callbacks.
 

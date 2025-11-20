@@ -290,7 +290,7 @@ router.post('/users', {
 
 </CodeGroup>
 
-## Custom headers
+## Custom Headers
 
 The `headers` option allows you to add custom headers to a request.
 
@@ -340,7 +340,7 @@ router.post('/users', data, {
 
 The headers Inertia uses internally to communicate its state to the server take priority and therefore cannot be overwritten.
 
-## File uploads
+## File Uploads
 
 When making visits / requests that include files, Inertia will automatically convert the request data into a `FormData` object. If you would like the request to always use a `FormData` object, you may use the `forceFormData` option.
 
@@ -382,7 +382,7 @@ router.post('/companies', data, {
 
 For more information on uploading files, please consult the dedicated [file uploads](/v1/the-basics/file-uploads) documentation.
 
-## Browser history
+## Browser History
 
 When making visits, Inertia automatically adds a new entry into the browser history. However, it's also possible to replace the current history entry by setting the `replace` option to `true`.
 
@@ -416,7 +416,7 @@ router.get('/users', { search: 'John' }, { replace: true })
 
 Visits made to the same URL automatically set `replace` to `true`.
 
-## State preservation
+## State Preservation
 
 By default, page visits to the same page create a fresh page component instance. This causes any local state, such as form inputs, scroll positions, and focus states to be lost.
 
@@ -522,7 +522,7 @@ router.post('/users', data, {
 
 </CodeGroup>
 
-## Scroll preservation
+## Scroll Preservation
 
 When navigating between pages, Inertia mimics default browser behavior by automatically resetting the scroll position of the document body (as well as any [scroll regions](/scroll-management#scroll-regions) you've defined) back to the top of the page.
 
@@ -626,7 +626,7 @@ router.post('/users', data, {
 
 For more information regarding this feature, please consult the [scroll management](/v1/advanced/scroll-management) documentation.
 
-## Partial reloads
+## Partial Reloads
 
 The `only` option allows you to request a subset of the props (data) from the server on subsequent visits to the same page, thus making your application more efficient since it does not need to retrieve data that the page is not interested in refreshing.
 
@@ -660,7 +660,7 @@ router.visit('/users', { search: 'John' }, { only: ['users'] })
 
 For more information on this feature, please consult the [partial reloads](/v1/advanced/partial-reloads) documentation.
 
-## Visit cancellation
+## Visit Cancellation
 
 You can cancel a visit using a cancel token, which Inertia automatically generates and provides via the `onCancelToken()` callback prior to making the visit.
 
@@ -714,7 +714,7 @@ this.cancelToken.cancel()
 
 The `onCancel()` and `onFinish()` event callbacks will be executed when a visit is cancelled.
 
-## Event callbacks
+## Event Callbacks
 
 In addition to Inertia's [global events](/v1/advanced/events), Inertia also provides a number of per-visit event callbacks.
 
