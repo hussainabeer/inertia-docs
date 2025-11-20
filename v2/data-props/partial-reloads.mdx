@@ -157,34 +157,9 @@ return Inertia::render('Users/Index', [
 
 Here's a summary of each approach:
 
-{/* | Approach         | Standard Visits | Partial Reloads | Evaluated |                                                                                                                                                                                          |
+| Approach         | Standard Visits | Partial Reloads | Evaluated |                                                                                                                                                                                          |
 |:--------------------|:---------------|:----------------|:----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `User::all()` | ALWAYS | OPTIONALLY | ALWAYS |
-| `fn () => User::all()` | ALWAYS | OPTIONALLY | ONLY when needed |                                                                                                                                                                               |
-| `Inertia::optional(fn () => User::all())` | NEVER | OPTIONALLY | ONLY when needed |                                                                                                                                                                               |
-| `Inertia::always(fn () => User::all())` | ALWAYS | ALWAYS | ALWAYS |                                                                                                                                                                               | */}
-
-
-```php
-return Inertia::render('Users/Index', [
-    // ALWAYS included on standard visits
-    // OPTIONALLY included on partial reloads
-    // ALWAYS evaluated
-    'users' => User::all(),
-
-    // ALWAYS included on standard visits
-    // OPTIONALLY included on partial reloads
-    // ONLY evaluated when needed
-    'users' => fn () => User::all(),
-
-    // NEVER included on standard visits
-    // OPTIONALLY included on partial reloads
-    // ONLY evaluated when needed
-    'users' => Inertia::optional(fn () => User::all()),
-
-    // ALWAYS included on standard visits
-    // ALWAYS included on partial reloads
-    // ALWAYS evaluated
-    'users' => Inertia::always(User::all()),
-]);
-```
+| <span style={{whiteSpace: 'nowrap'}}>`User::all()`</span> | Always | Optionally | Always |
+| <span style={{whiteSpace: 'nowrap'}}>`fn () => User::all()`</span> | Always | Optionally | Only When Needed |                                                                                                                                                                               |
+| <span style={{whiteSpace: 'nowrap'}}>`Inertia::optional(fn () => User::all())`</span> | Never | Optionally | Only When Needed |                                                                                                                                                                               |
+| <span style={{whiteSpace: 'nowrap'}}>`Inertia::always(fn () => User::all())`</span> | Always | Always | Always |                                                                                                                                                                               |
