@@ -3,9 +3,9 @@ title: Server-Side Rendering (SSR)
 ---
 
 import { ClientSpecific } from "/snippets/client-specific.jsx"
-import { VueSpecific } from "/snippets/vue-specific.jsx"
 import { ReactSpecific } from "/snippets/react-specific.jsx"
 import { SvelteSpecific } from "/snippets/svelte-specific.jsx"
+import { VueSpecific } from "/snippets/vue-specific.jsx"
 
 <Warning>This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v2 docs](/v2) for the latest information.</Warning>
 
@@ -197,11 +197,11 @@ With the server running, you should be able to access your app within the browse
 
 Since your website is now being server-side rendered, you can instruct <VueSpecific>Vue</VueSpecific><ReactSpecific>React</ReactSpecific><SvelteSpecific>Svelte</SvelteSpecific> to "hydrate" the static markup and make it interactive instead of re-rendering all the HTML that we just generated.
 
-<vue2>Inertia automatically enables client-side hydration in Vue 2 apps, so no changes are required.
+{/* <vue2>Inertia automatically enables client-side hydration in Vue 2 apps, so no changes are required. */}
 
-</vue2><vue3>To enable client-side hydration in a Vue 3 app, update your `app.js` file to use `createSSRApp` instead of `createApp`:
+{/* </vue2><vue3>To enable client-side hydration in a Vue 3 app, update your `app.js` file to use `createSSRApp` instead of `createApp`: */}
 
-</vue3><ReactSpecific>To enable client-side hydration in a React app, update your `app.js` file to use `hydrateRoot` instead of `createRoot`:</ReactSpecific><SvelteSpecific>To enable client-side hydration in a Svelte app, set the `hydratable` compiler option to `true` in your `vite.config.js` file:</SvelteSpecific>
+{/* </vue3><ReactSpecific>To enable client-side hydration in a React app, update your `app.js` file to use `hydrateRoot` instead of `createRoot`:</ReactSpecific><SvelteSpecific>To enable client-side hydration in a Svelte app, set the `hydratable` compiler option to `true` in your `vite.config.js` file:</SvelteSpecific> */}
 
 <CodeGroup>
 
@@ -269,7 +269,7 @@ Since your website is now being server-side rendered, you can instruct <VueSpeci
 
 </CodeGroup>
 
-<SvelteSpecific>You'll also need to enable hydration in your `app.js` file:
+{/* <SvelteSpecific>You'll also need to enable hydration in your `app.js` file: */}
 
 ```diff
    import { createInertiaApp } from '@inertiajs/svelte'

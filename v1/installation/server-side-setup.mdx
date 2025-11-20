@@ -24,8 +24,7 @@ composer require inertiajs/inertia-laravel
 
 Next, setup the root template that will be loaded on the first page visit to your application. This will be used to load your site assets (CSS and JavaScript), and will also contain a root `<div>` in which to boot your JavaScript application.
 
-```html
-
+```blade
 <html>
     <head>
         <meta charset="utf-8" />
@@ -55,10 +54,11 @@ Once the middleware has been published, append the `HandleInertiaRequests` middl
 
 ```php
 use App\Http\Middleware\HandleInertiaRequests;
+
 ->withMiddleware(function (Middleware $middleware) {
-$middleware->web(append: [
-HandleInertiaRequests::class,
-]);
+    $middleware->web(append: [
+        HandleInertiaRequests::class,
+    ]);
 })
 ```
 

@@ -234,10 +234,10 @@ Finally, if you have defined any progress customizations, you can move them to t
 
 ```js
 createInertiaApp({
-progress: {
-color: '#29d',
-},
-// ...
+    progress: {
+        color: '#29d',
+    },
+    // ...
 })
 ```
 
@@ -245,8 +245,8 @@ If you're using a custom progress indicator, you can disable the default progres
 
 ```js
 createInertiaApp({
-progress: false,
-// ...
+    progress: false,
+    // ...
 })
 ```
 
@@ -256,10 +256,10 @@ We've removed the previously deprecated lowercase `app` argument from the `setup
 
 ```diff
 createInertiaApp({
-// ...
+    // ...
 -   setup({ app, props }) {
 +   setup({ App, props }) {
-// ...
+    // ...
 },
 })
 ```
