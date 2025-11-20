@@ -113,7 +113,7 @@ class UserController extends Controller
 
 ## Creating Layouts
 
-{/* While not required, for most projects it makes sense to create a site layout that all of your pages can extend. You may have noticed in our page example above that we're wrapping the page content within a `{`<layout>`}</layout>` component. Here's an example of such a component: */}
+While not required, for most projects it makes sense to create a site layout that all of your pages can extend. You may have noticed in our page example above that we're wrapping the page content within a `<Layout>` component. Here's an example of such a component:
 
 <CodeGroup>
 
@@ -388,14 +388,18 @@ export default Home
 
 </CodeGroup>
 
-{/* <VueSpecific>If you're using Vue 2.7 or Vue 3, you can alternatively use the [defineOptions plugin](https://vue-macros.sxzz.moe/macros/define-options.html) to define a layout within `<script setup>`: */}
+<VueSpecific>
+If you're using Vue 2.7 or Vue 3, you can alternatively use the [defineOptions plugin](https://vue-macros.sxzz.moe/macros/define-options.html) to define a layout within `<script setup>`:
 
-{/* ```html
+```html
 <script setup>
 import Layout from './Layout'
 defineOptions({ layout: Layout })
 </script>
-```</VueSpecific>## Default layouts */}
+```
+</VueSpecific>
+
+## Default layouts
 
 If you're using persistent layouts, you may find it convenient to define the default page layout in the `resolve()` callback of your application's main JavaScript file.
 

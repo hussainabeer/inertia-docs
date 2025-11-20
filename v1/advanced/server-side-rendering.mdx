@@ -6,6 +6,8 @@ import { ClientSpecific } from "/snippets/client-specific.jsx"
 import { ReactSpecific } from "/snippets/react-specific.jsx"
 import { SvelteSpecific } from "/snippets/svelte-specific.jsx"
 import { VueSpecific } from "/snippets/vue-specific.jsx"
+import { Vue2Specific } from "/snippets/vue2-specific.jsx"
+import { Vue3Specific } from "/snippets/vue3-specific.jsx"
 
 <Warning>This is documentation for Inertia.js v1, which is no longer actively maintained. Please refer to the [v2 docs](/v2) for the latest information.</Warning>
 
@@ -154,14 +156,14 @@ Next, we need to update our Vite configuration to build our new `ssr.js` file. W
 
 ```diff
 export default defineConfig({
-plugins: [
-laravel({
-input: ['resources/css/app.css', 'resources/js/app.js'],
-+     ssr: 'resources/js/ssr.js',
-refresh: true,
-}),
-// ...
-],
+    plugins: [
+        laravel({
+            input: ['resources/css/app.css', 'resources/js/app.js'],
++           ssr: 'resources/js/ssr.js',
+            refresh: true,
+        }),
+        // ...
+    ],
 })
 ```
 
@@ -171,7 +173,7 @@ Next, let's update the `build` script in our `package.json` file to also build o
 
 ```diff
 "scripts": {
-"dev": "vite",
+    "dev": "vite",
 -   "build": "vite build"
 +   "build": "vite build && vite build --ssr"
 },
@@ -195,13 +197,17 @@ With the server running, you should be able to access your app within the browse
 
 ## Client Side Hydration
 
+<ClientSpecific>
 Since your website is now being server-side rendered, you can instruct <VueSpecific>Vue</VueSpecific><ReactSpecific>React</ReactSpecific><SvelteSpecific>Svelte</SvelteSpecific> to "hydrate" the static markup and make it interactive instead of re-rendering all the HTML that we just generated.
+</ClientSpecific>
 
-{/* <vue2>Inertia automatically enables client-side hydration in Vue 2 apps, so no changes are required. */}
+<Vue2Specific>Inertia automatically enables client-side hydration in Vue 2 apps, so no changes are required.</Vue2Specific>
 
-{/* </vue2><vue3>To enable client-side hydration in a Vue 3 app, update your `app.js` file to use `createSSRApp` instead of `createApp`: */}
+<Vue3Specific>To enable client-side hydration in a Vue 3 app, update your `app.js` file to use `createSSRApp` instead of `createApp`:</Vue3Specific>
 
-{/* </vue3><ReactSpecific>To enable client-side hydration in a React app, update your `app.js` file to use `hydrateRoot` instead of `createRoot`:</ReactSpecific><SvelteSpecific>To enable client-side hydration in a Svelte app, set the `hydratable` compiler option to `true` in your `vite.config.js` file:</SvelteSpecific> */}
+<ReactSpecific>To enable client-side hydration in a React app, update your `app.js` file to use `hydrateRoot` instead of `createRoot`:</ReactSpecific>
+
+<SvelteSpecific>To enable client-side hydration in a Svelte app, set the `hydratable` compiler option to `true` in your `vite.config.js` file:</SvelteSpecific>
 
 <CodeGroup>
 
@@ -269,7 +275,9 @@ Since your website is now being server-side rendered, you can instruct <VueSpeci
 
 </CodeGroup>
 
-{/* <SvelteSpecific>You'll also need to enable hydration in your `app.js` file: */}
+<SvelteSpecific>
+
+You'll also need to enable hydration in your `app.js` file:
 
 ```diff
    import { createInertiaApp } from '@inertiajs/svelte'
@@ -286,9 +294,13 @@ Since your website is now being server-side rendered, you can instruct <VueSpeci
 +     new App({ target: el, hydrate: true })
 +   },
    })
-```</SvelteSpecific>## Deployment
+```
 
-When deploying your SSR enabled app to production, you'll need to build both the client-side ( `app.js`) and server-side bundles (`ssr.js`), and then run the SSR server as a background process, typically using a process monitoring tool such as Supervisor.
+</SvelteSpecific>
+
+## Deployment
+
+When deploying your SSR enabled app to production, you'll need to build both the client-side (`app.js`) and server-side bundles (`ssr.js`), and then run the SSR server as a background process, typically using a process monitoring tool such as Supervisor.
 
 ```bash
 php artisan inertia:start-ssr
