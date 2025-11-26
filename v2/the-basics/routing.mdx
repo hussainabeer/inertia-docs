@@ -61,6 +61,36 @@ When [server-side rendering](/v2/advanced/server-side-rendering) is enabled, you
 });
 ```
 
+Further more, when using [server-side rendering](/v2/advanced/server-side-rendering), add `ziggy-js` as a dependancy using `yarn add ziggy-js`. Then, make the route function available globally as below in your `ssr.js` file.
+
+```js
+// ...
+import { route } from 'ziggy-js';
+
+createServer((page) => {
+  return createInertiaApp({
+    // ...
+    setup({ App, props, plugin }) {
+      // Below snippet makes the route function available globally
+      global.route = (name, params, absolute, config = page.props.ziggy) =>
+        route(name, params, absolute, config);
+
+      return createSSRApp({ render: () => h(App, props) })
+        .use(plugin)
+        .use(ZiggyVue, {
+          ...page.props.ziggy,
+          location: new URL(page.props?.ziggy?.location),
+        });
+    },
+  });
+});
+```
+
+<Note>
+  Above will prevent the `Reference error: route is not defined..` error when
+  using SSR.
+</Note>
+
 ## Customizing the Page URL
 
 The [page object](/v2/core-concepts/the-protocol#the-page-object) includes a `url` that represents the current page's URL. By default, the Laravel adapter resolves this using the `fullUrl()` method on the `Request` instance, but strips the scheme and host so the result is a relative URL.
